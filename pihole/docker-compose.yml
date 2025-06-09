@@ -4,12 +4,20 @@ services:
   pihole:
     image: pihole/pihole:latest
     container_name: pihole
-    network_mode: "host"      # ← add this and remove any `ports:` section
+    ports:
+      - '53:53/tcp'
+      - '53:53/udp'
+      - '80:80/tcp'
+      - '443:443/tcp'
+    cap_add:
+      - NET_ADMIN
+      - SYS_TIME             # optional if you need NTP
     environment:
       TZ: 'Europe/Lisbon'
-      WEBPASSWORD: 'your-password'
-      DNS1: 1.1.1.1
-      DNS2: 1.0.0.1
+      FTLCONF_webserver_api_password: 'your-password'
+      FTLCONF_dns_listeningMode: 'all'  # critical for bridge mode
+      DNS1: '1.1.1.1'
+      DNS2: '1.0.0.1'
     volumes:
       - './etc-pihole:/etc/pihole'
       - './etc-dnsmasq.d:/etc/dnsmasq.d'
