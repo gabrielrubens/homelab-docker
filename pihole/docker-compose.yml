@@ -12,10 +12,10 @@ services:
     volumes:
       - './etc-pihole:/etc/pihole'
       - './etc-dnsmasq.d:/etc/dnsmasq.d'
-    ports:
-      - '53:53/tcp'
-      - '53:53/udp'
-      - '80:80'
+    # ports:
+      # - '53:53/tcp'
+      # - '53:53/udp'
+      # - '80:80'
     restart: unless-stopped
     cap_add:
       - NET_ADMIN  # required to bind to DNS ports
