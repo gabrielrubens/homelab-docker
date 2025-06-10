@@ -23,6 +23,7 @@ To deploy a new container:
 | **Pi-hole**    | DNS-level ad blocker     | `pihole/pihole:latest`     | `53/udp, 80` | `/etc/pihole`, `/etc/dnsmasq.d`             | Static IP recommended          |
 | **Netdata**    | Real-time system metrics | `netdata/netdata:latest`   | `19999`      | `/etc/netdata`, `/var/lib/netdata`, etc.    | Web UI for monitoring          |
 | **Glances**    | Simple system monitoring | `nicolargo/glances:latest` | `61208`      | `/var/run/docker.sock`, `/proc`, `/sys`     | Web UI mode (`glances -w`)     |
+| **Homepage.dev** | Simple static homepage  | `homepage-dev/homepage:latest` | `3000`       | `/config.yml`                               | Minimal link dashboard        |
 
 ### 📁 Planned Containers
 
