@@ -1,3 +1,4 @@
+# dashy/conf.yml
 pages:
   - name: "Glances Widgets"
     path: "glances-widgets.yml"
