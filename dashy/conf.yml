@@ -23,22 +23,6 @@ pageInfo:
       path: https://dashy.to/docs
   footerText: "© Gabriel Rubens – Powered by Dashy"
 
-# Top‐level pages entry for extra Dashy pages
-pages:
-  - title: "Glances Widgets"
-    icon: fas fa-chart-pie
-    # this creates a separate page accessible via sidebar nav
-    sections:
-      - name: "System Resource Monitoring"
-        description: "Live metrics from Glances"
-        displayData:
-          cols: 2
-        items:
-          - widget: gl-current-cpu
-          - widget: gl-mem-speedometer
-          - widget: gl-disk-space
-          - widget: gl-alerts
-
 sections:
   - name: Core Services
     icon: fas fa-cogs
