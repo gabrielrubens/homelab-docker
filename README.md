@@ -31,22 +31,32 @@ A reference for setting up and maintaining my personal Homelab environment, focu
 
 ## 🛆 Docker Containers
 
+All Docker Compose Files are located on the project [gabrielrubens/homelab-docker](https://github.com/gabrielrubens/homelab-docker/), and there you can see the subfolders, such as gabrielrubens/homelab-dockerpihole/docker-compose.yml.
+To deploy a new Container, we need to go to Portainer and Add Stack.
+
+
 ### ✅ Running Containers
 
 | Container      | Description             | Image                    | Ports        | Volumes                                     | Notes                  |
 |----------------|-------------------------|--------------------------|--------------|---------------------------------------------|------------------------|
 | **Pi-hole**    | DNS-level ad blocker    | `pihole/pihole:latest`   | `53/udp, 80` | `/etc/pihole`, `/etc/dnsmasq.d`             | Static IP recommended  |
 | **Portainer**  | Container management UI | `portainer/portainer-ce` | `9000`       | `/var/run/docker.sock:/var/run/docker.sock` | Use for GUI management |
-| **WireGuard**  | VPN tunnel access       | `linuxserver/wireguard`  | `51820/udp`  | `/config`, `/lib/modules`                   | Enable port forwarding |
-| **Watchtower** | Auto-update containers  | `containrrr/watchtower`  | —            | Docker socket                               | Runs on a schedule     |
 
 ### 📁 Planned Containers
 
+- Netdata
+- WireGuard
+- Watchtower
 - Home Assistant
 - Jellyfin or Plex
 - Nextcloud
 - Uptime Kuma
 - Vaultwarden
+
+Example do add on the table when deployed:
+| **WireGuard**  | VPN tunnel access       | `linuxserver/wireguard`  | `51820/udp`  | `/config`, `/lib/modules`                   | Enable port forwarding |
+| **Watchtower** | Auto-update containers  | `containrrr/watchtower`  | —            | Docker socket                               | Runs on a schedule     |
+
 
 ---
 
@@ -56,7 +66,6 @@ A reference for setting up and maintaining my personal Homelab environment, focu
 - Static IP assigned to Mini PC
 - DNS set to Pi-hole IP: `192.168.1.x`
 - Port forwarding enabled for:
-  - `51820/udp` (WireGuard)
   - `9000/tcp` (Portainer if remote access needed)
 - Local domain resolution via Pi-hole DNS settings
 
@@ -69,16 +78,11 @@ A reference for setting up and maintaining my personal Homelab environment, focu
 sudo apt update && sudo apt upgrade -y
 sudo apt install docker.io docker-compose -y
 sudo usermod -aG docker $USER
-
-# Create docker-compose directory
-mkdir -p ~/homelab/docker && cd ~/homelab/docker
 ```
-
-Each service has its own `docker-compose.yml` inside subfolders (e.g., `~/homelab/docker/pihole/`).
 
 ---
 
-## 🔄 Backup & Automation
+## 🔄 Backup & Automation (Planned)
 
 - Automatic daily backups using `rsync` to external USB.
 - Configs stored in Git (private repo).
