@@ -10,4 +10,5 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
+    command: glances -w --disable-plugin sensors  # start web server, disable sensors plugin if unwanted
     restart: unless-stopped
