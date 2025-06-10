@@ -1,4 +1,4 @@
-# config/info-widgets.yml
+# config/widgets.yml
 infoWidgets:
   - type: gl-current-cpu
     service: glances
