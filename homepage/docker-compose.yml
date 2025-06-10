@@ -7,11 +7,9 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./config:/app/config        # your YAML configs here
-      - /var/run/docker.sock:/var/run/docker.sock:ro  # optional: for auto-discovery / widgets
+      - ./config:/app/config:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
+      # Allow access from your local network name
       HOMEPAGE_ALLOWED_HOSTS: homelab:3000
-      # PUID/PGID if you want non-root:
-      # PUID: 1000
-      # PGID: 1000
     restart: unless-stopped

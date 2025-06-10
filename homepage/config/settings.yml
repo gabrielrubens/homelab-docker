@@ -1,6 +1,5 @@
 # config/settings.yml
-
 startUrl: "/"
-background: "https://images.unsplash.com/photo-..."
-backgroundOpacity: 50
-statusStyle: dot
+title: "🏠 Homelab Homepage"
+description: "Links & live widgets for my Homelab"
+background: ""
