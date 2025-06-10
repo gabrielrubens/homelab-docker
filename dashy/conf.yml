@@ -1,3 +1,7 @@
+pages:
+  - name: "Glances Widgets"
+    path: "glances-widgets.yml"
+
 appConfig:
   theme: material
   customColors:
