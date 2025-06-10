@@ -2,7 +2,8 @@ version: '3.8'
 
 services:
   homepage:
-    image: homepage-dev/homepage:latest
+    # Use the public GHCR image, not homepage-dev/homepage
+    image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     ports:
       - "3000:3000"
