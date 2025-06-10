@@ -41,10 +41,10 @@ To deploy a new Container, we need to go to Portainer and Add Stack.
 |----------------|-------------------------|--------------------------|--------------|---------------------------------------------|------------------------|
 | **Pi-hole**    | DNS-level ad blocker    | `pihole/pihole:latest`   | `53/udp, 80` | `/etc/pihole`, `/etc/dnsmasq.d`             | Static IP recommended  |
 | **Portainer**  | Container management UI | `portainer/portainer-ce` | `9000`       | `/var/run/docker.sock:/var/run/docker.sock` | Use for GUI management |
+| **Netdata**    | Real-time system metrics | `netdata/netdata:latest` | `19999`      | `/etc/netdata`, `/var/lib/netdata`, etc.    | Web UI for monitoring |
 
 ### 📁 Planned Containers
 
-- Netdata
 - WireGuard
 - Watchtower
 - Home Assistant
