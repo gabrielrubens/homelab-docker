@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   dashy:
-    image: lissy93/dashy:latest
+    image: ghcr.io/lissy93/dashy:latest
     container_name: dashy
     ports:
       - 4000:80
