@@ -1,22 +1,22 @@
 # config/widgets.yml
-infoWidgets:
-  - type: gl-current-cpu
-    service: glances
-    title: CPU Usage
-    size: small
+# infoWidgets:
+#   - type: gl-current-cpu
+#     service: glances
+#     title: CPU Usage
+#     size: small
 
-  - type: gl-mem-speedometer
-    service: glances
-    title: Memory Usage
-    size: small
+#   - type: gl-mem-speedometer
+#     service: glances
+#     title: Memory Usage
+#     size: small
 
-  - type: gl-disk-space
-    service: glances
-    title: Disk Space
-    mountpoint: "/"    # root filesystem
-    size: small
+#   - type: gl-disk-space
+#     service: glances
+#     title: Disk Space
+#     mountpoint: "/"    # root filesystem
+#     size: small
 
-  - type: gl-alerts
-    service: glances
-    title: Alerts
-    size: medium
+#   - type: gl-alerts
+#     service: glances
+#     title: Alerts
+#     size: medium
