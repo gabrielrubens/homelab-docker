@@ -16,12 +16,13 @@ To deploy a new container:
 
 ### ✅ Running Containers
 
-| Container      | Description              | Image                    | Ports        | Volumes                                     | Notes                    |
-|----------------|--------------------------|--------------------------|--------------|---------------------------------------------|--------------------------|
-| **Dashy**      | Homelab dashboard UI     | `lissy93/dashy:latest`   | `4000`       | `/conf.yml`                                 | Web UI for all services  |
-| **Portainer**  | Container management UI  | `portainer/portainer-ce` | `9000`       | `/var/run/docker.sock:/var/run/docker.sock` | Use for GUI management   |
-| **Pi-hole**    | DNS-level ad blocker     | `pihole/pihole:latest`   | `53/udp, 80` | `/etc/pihole`, `/etc/dnsmasq.d`             | Static IP recommended    |
-| **Netdata**    | Real-time system metrics | `netdata/netdata:latest` | `19999`      | `/etc/netdata`, `/var/lib/netdata`, etc.    | Web UI for monitoring    |
+| Container      | Description              | Image                      | Ports        | Volumes                                     | Notes                          |
+|----------------|--------------------------|----------------------------|--------------|---------------------------------------------|--------------------------------|
+| **Dashy**      | Homelab dashboard UI     | `lissy93/dashy:latest`     | `4000`       | `/conf.yml`                                 | Web UI for all services        |
+| **Portainer**  | Container management UI  | `portainer/portainer-ce`   | `9000`       | `/var/run/docker.sock:/var/run/docker.sock` | Use for GUI management         |
+| **Pi-hole**    | DNS-level ad blocker     | `pihole/pihole:latest`     | `53/udp, 80` | `/etc/pihole`, `/etc/dnsmasq.d`             | Static IP recommended          |
+| **Netdata**    | Real-time system metrics | `netdata/netdata:latest`   | `19999`      | `/etc/netdata`, `/var/lib/netdata`, etc.    | Web UI for monitoring          |
+| **Glances**    | Simple system monitoring | `nicolargo/glances:latest` | `61208`      | `/var/run/docker.sock`, `/proc`, `/sys`     | Web UI mode (`glances -w`)     |
 
 ### 📁 Planned Containers
 
