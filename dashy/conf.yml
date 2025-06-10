@@ -88,3 +88,16 @@ sections:
         description: See full list of configuration options
         url: https://github.com/Lissy93/dashy/blob/master/docs/configuring.md
         icon: fas fa-wrench
+
+  - name: System Monitoring
+    icon: fas fa-tachometer-alt-fast
+    items:
+      - title: Glances
+        description: Simple resource usage
+        icon: hl-glances
+        url: http://homelab:61208
+      # If you add cAdvisor later, uncomment:
+      # - title: cAdvisor
+      #   description: Container monitoring
+      #   icon: hl-cadvisor
+      #   url: http://homelab:8080/cadvisor
