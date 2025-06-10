@@ -29,7 +29,7 @@ sections:
     items:
       - title: Portainer
         description: Container UI Management
-        icon: docker
+        icon: hl-portainer
         url: http://homelab:9000
       - title: Pi-hole
         description: Network-wide ad blocking
