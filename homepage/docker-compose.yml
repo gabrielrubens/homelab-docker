@@ -2,11 +2,16 @@ version: '3.8'
 
 services:
   homepage:
-    image: homepage-dev/homepage:latest
+    image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     ports:
       - "3000:3000"
     volumes:
-      # Optional: mount in a custom config file if you want to tweak the homepage
-      - ./config.yml:/app/config.yml
+      - ./config:/app/config        # your YAML configs here
+      - /var/run/docker.sock:/var/run/docker.sock:ro  # optional: for auto-discovery / widgets
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: homelab:3000
+      # PUID/PGID if you want non-root:
+      # PUID: 1000
+      # PGID: 1000
     restart: unless-stopped
