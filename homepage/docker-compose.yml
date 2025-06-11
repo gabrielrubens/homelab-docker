@@ -1,3 +1,4 @@
+version: '3.8'
 
 services:
   homepage:
@@ -6,9 +7,12 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - /home/gabriel/dev/homelab-docker/homepage/config:/app/config:rw
+      # Bind your local config folder directly into /app/config
+      - /home/gabriel/dev/homelab-docker/homepage/config:/app/config:ro
+
+      # Docker socket (optional)
       - /var/run/docker.sock:/var/run/docker.sock:ro
+
     environment:
-      # Allow access by hostname or IP
       HOMEPAGE_ALLOWED_HOSTS: homelab:3000,192.168.1.92:3000
     restart: unless-stopped
