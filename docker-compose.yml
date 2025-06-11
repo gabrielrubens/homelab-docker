@@ -1,0 +1,27 @@
+version: '2.4'
+
+services:
+  pihole:
+    extends:
+      file: ./pihole/docker-compose.yml
+      service: pihole
+
+  netdata:
+    extends:
+      file: ./netdata/docker-compose.yml
+      service: netdata
+
+  glances:
+    extends:
+      file: ./glances/docker-compose.yml
+      service: glances
+
+  homepage:
+    extends:
+      file: ./homepage/docker-compose.yml
+      service: homepage
+
+  dashy:
+    extends:
+      file: ./dashy/docker-compose.yml
+      service: dashy
