@@ -1,17 +1,17 @@
 # config/bookmarks.yml
-# bookmarks:
-#   - name: Dashy
-#     url: http://homelab:4000
-#     icon: dashboard
-#   - name: Portainer
-#     url: http://homelab:9000
-#     icon: dashboard_customize
-#   - name: Pi-hole
-#     url: http://homelab/admin
-#     icon: block
-#   - name: Netdata
-#     url: http://homelab:19999
-#     icon: speed
-#   - name: Homepage.dev
-#     url: http://homelab:3000
-#     icon: home
+bookmarks:
+  - name: Dashy
+    url: http://homelab:4000
+    icon: dashboard
+  - name: Portainer
+    url: http://homelab:9000
+    icon: dashboard_customize
+  - name: Pi-hole
+    url: http://homelab/admin
+    icon: block
+  - name: Netdata
+    url: http://homelab:19999
+    icon: speed
+  - name: Homepage.dev
+    url: http://homelab:3000
+    icon: home
