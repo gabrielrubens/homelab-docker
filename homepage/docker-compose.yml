@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
@@ -7,10 +5,10 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      # Bind your local config folder directly into /app/config
-      - /home/gabriel/dev/homelab-docker/homepage/config:/app/config:ro
+      # Relative bind: the 'config' folder next to this compose file
+      - ./config:/app/config:ro
 
-      # Docker socket (optional)
+      # Docker socket (if you need it)
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
     environment:
