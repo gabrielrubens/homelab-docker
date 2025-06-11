@@ -10,5 +10,5 @@ services:
       - ./config:/app/config:rw
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-      HOMEPAGE_ALLOWED_HOSTS: homelab:3000
+      HOMEPAGE_ALLOWED_HOSTS: homelab:3000,192.168.1.92:3000
     restart: unless-stopped
