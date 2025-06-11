@@ -1,7 +1,7 @@
 version: '3.8'
 
 volumes:
-  homelab-docker:        # reference your existing volume
+  homelab-docker:
     external: true
 
 services:
@@ -11,16 +11,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      # Mount only the homepage/config subfolder from homelab-docker
-      - homelab-docker:/data:ro
-
-      # And then bind the sub-path into /app/config
-      # Docker supports sub-paths by combining bind and named volumes:
-      # Use the internal mountpoint of the named volume + sub-path
-      - type: bind
-        source: /var/lib/docker/volumes/homelab-docker/_data/homepage/config
-        target: /app/config
-
+      # mount the exact config subfolder from your repo:
+      - homelab-docker:/home/gabriel/dev/homelab-docker/homepage/config:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       HOMEPAGE_ALLOWED_HOSTS: homelab:3000,192.168.1.92:3000
