@@ -6,10 +6,10 @@ services:
       - "3000:3000"
     volumes:
       # Relative bind: the 'config' folder next to this compose file
-      - ./config:/app/config:ro
+      - ./config:/app/config:rw
 
       # Docker socket (if you need it)
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock:r
 
     environment:
       HOMEPAGE_ALLOWED_HOSTS: homelab:3000,192.168.1.92:3000
