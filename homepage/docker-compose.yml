@@ -7,8 +7,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      # <-- bind your local config/ into the container's HOME config dir
-      - ./config:/home/node/.config/homepage:ro
+      - ./config:/app/config:ro        # mount to /app/config
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       HOMEPAGE_ALLOWED_HOSTS: homelab:3000
