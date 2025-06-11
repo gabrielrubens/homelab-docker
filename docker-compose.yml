@@ -9,12 +9,12 @@ version: '2.4'
 #       device: /home/gabriel/homelab-data   # host dir for all shared data
 
 services:
-  pihole:
-    extends:
-      file: ./pihole/docker-compose.yml
-      service: pihole
-    # volumes:
-    #   - homelab_data:/data/shared
+  # pihole:
+  #   extends:
+  #     file: ./pihole/docker-compose.yml
+  #     service: pihole
+  #   # volumes:
+  #   #   - homelab_data:/data/shared
 
   # netdata:
   #   extends:
