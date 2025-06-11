@@ -6,9 +6,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      # Bind your Git checkout config directory directly
-      - /home/gabriel/dev/homelab-docker/homepage/config:/app/config:ro
-      # Optional: Docker socket for service discovery/widgets
+      - /home/gabriel/dev/homelab-docker/homepage/config:/app/config:rw
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       # Allow access by hostname or IP
