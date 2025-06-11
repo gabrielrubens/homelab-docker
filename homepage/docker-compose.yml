@@ -2,18 +2,18 @@ version: '3.8'
 
 services:
   homepage:
+    # Use the public GHCR image, not homepage-dev/homepage
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     ports:
-      - 3000:3000
+      - "3000:3000"
     volumes:
-      - /path/to/config:/app/config # Make sure your local config directory exists
-      - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
+      - type: bind
+        source: /var/lib/docker/volumes/portainer_data/_data/compose/14/homepage/config
+        target: /app/config:ro
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock:ro
     environment:
       HOMEPAGE_ALLOWED_HOSTS: homelab:3000
-      # PUID/PGID if you want non-root:
-      # PUID: 1000
-      # PGID: 1000
     restart: unless-stopped
-
-
