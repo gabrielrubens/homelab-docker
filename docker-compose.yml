@@ -1,10 +1,20 @@
 version: '2.4'
 
+# volumes:
+#   homelab_data:
+#     driver: local
+#     driver_opts:
+#       o: bind
+#       type: none
+#       device: /home/gabriel/homelab-data   # host dir for all shared data
+
 services:
   pihole:
     extends:
       file: ./pihole/docker-compose.yml
       service: pihole
+    # volumes:
+    #   - homelab_data:/data/shared
 
   netdata:
     extends:
