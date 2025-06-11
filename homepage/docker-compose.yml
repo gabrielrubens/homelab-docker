@@ -7,7 +7,7 @@ services:
     container_name: homepage
     ports:
       - "3000:3000"
-    volumes:
+    # volumes:
       # - type: bind
       #   source: /var/lib/docker/volumes/portainer_data/_data/compose/14/homepage/config
       #   target: /app/config:ro
