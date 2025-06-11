@@ -16,10 +16,10 @@ services:
     # volumes:
     #   - homelab_data:/data/shared
 
-  netdata:
-    extends:
-      file: ./netdata/docker-compose.yml
-      service: netdata
+  # netdata:
+  #   extends:
+  #     file: ./netdata/docker-compose.yml
+  #     service: netdata
 
   glances:
     extends:
