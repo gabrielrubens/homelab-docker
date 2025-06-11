@@ -1,0 +1,28 @@
+---
+# config/settings.yml
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/settings
+
+# Base info
+startUrl: "/"
+title: "🏠 Homelab Homepage"
+description: "Links & live widgets for my Homelab"
+
+# Visual theme
+theme: dark
+color: slate
+
+
+# Background styling (using Tailwind CSS utilities)
+background:
+  image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=256
+  blur: sm
+  saturate: 50
+  brightness: 50
+  opacity: 50
+
+# External data providers (optional; remove if unused)
+providers:
+  openweathermap: openweathermapapikey
+  weatherapi: weatherapiapikey
+  ipgeolocation: ipgeolocationapikey

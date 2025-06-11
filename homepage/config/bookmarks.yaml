@@ -1,0 +1,34 @@
+---
+# config/bookmarks.yml
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks/
+
+- Core Services:
+    - Dashy:
+        - abbr: DS
+          href: http://192.168.1.92:4000
+          icon: dashy.png
+    - Portainer:
+        - abbr: PT
+          href: http://192.168.1.92:9000
+          icon: portainer.png
+
+- Network & Monitoring:
+    - Pi-hole:
+        - abbr: PH
+          href: http://192.168.1.92/admin
+          icon: pi-hole.png
+    - Netdata:
+        - abbr: ND
+          href: http://192.168.1.92:19999
+          icon: netdata.png
+    - Glances:
+        - abbr: GL
+          href: http://192.168.1.92:61208
+          icon: glances.png
+
+- Self:
+    - Homepage.dev:
+        - abbr: HP
+          href: http://192.168.1.92:3000
+          icon: homepage.png

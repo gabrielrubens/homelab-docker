@@ -1,7 +1,0 @@
-# config/services.yml
-services:
-  glances:
-    name: Glances
-    url: http://homelab:61208
-    icon: memory
-    type: glances

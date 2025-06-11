@@ -1,0 +1,20 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Homelab Tools:
+    - Glances:
+        href: http://192.168.1.92:61208
+        description: Simple resource usage via Glances
+        icon: glances.png
+        siteMonitor: http://192.168.1.92:61208
+    - Portainer:
+        href: http://192.168.1.92:9000
+        description: Docker management via Portainer
+        icon: portainer.png
+        siteMonitor: http://192.168.1.92:9000
+        widget:
+          type: portainer
+          url: http://192.168.1.92:9443
+          env: 1
+          key: ptr_dLe4S8alpp8iEBLZ6oaUnf7P6kraPa0nHxu0fV2Pijw=
