@@ -8,7 +8,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./config:/app/config:ro
+      - /path/to/config:/app/config
+      # - ./config:/app/config:ro
       # - type: bind
       #   source: /var/lib/docker/volumes/portainer_data/_data/compose/14/homepage/config
       #   target: /app/config:ro
