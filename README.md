@@ -41,7 +41,20 @@ Example to add to the table when deployed:
 | **Watchtower** | Auto-update containers  | `containrrr/watchtower`  | —            | Docker socket                               | Runs on a schedule     |
 
 ---
+### 🗂️ Portainer
 
+We need to make sure that we have these volume because the other Containers will use it
+
+```bash
+docker volume create \
+  --driver local \
+  --opt type=none \
+  --opt o=bind \
+  --opt device=/home/gabriel/dev/homelab-docker \
+  homelab-docker
+```
+
+---
 ### 🔐 UFW Firewall Rules
 
 After adding or removing a container that exposes a port, update **UFW (Uncomplicated Firewall)** to ensure proper access:
