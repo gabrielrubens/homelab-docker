@@ -1,11 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd /home/gabriel/homelab-docker
+# Where your repo lives on the server
+#REPO_DIR="/home/gabriel/homelab-docker"
+
+#cd "$REPO_DIR"
+
+echo "Pulling latest changes…"
 git pull origin main
 
-for svc in dashy pihole netdata glances homepage; do
-  cd "$svc"
-  docker-compose pull
-  docker-compose up -d
-done
+echo "Running Ansible playbook to deploy all services…"
+# If you run this on the homelab server itself, limit to 'localhost'; 
+# if you run it remotely, limit to 'homelab-server'
+ANSIBLE_STDOUT_CALLBACK=debug \
+ANSIBLE_HOST_KEY_CHECKING=False \
+ansible-playbook \
+  -i ansible/inventory/hosts.yml \
+  ansible/playbook.yml \
+  --limit localhost \
+  --ask-become-pass
+
+echo "Done."
