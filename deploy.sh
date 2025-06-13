@@ -1,23 +1,28 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Where your repo lives on the server
-#REPO_DIR="/home/gabriel/homelab-docker"
+# Usage: ./deploy.sh [--server|-s]
+#   no args   → deploy to localhost
+#   --server  → deploy to homelab-server
 
-#cd "$REPO_DIR"
+LIMIT="localhost"
+TARGET_DESC="Locally (localhost)"
 
-echo "Pulling latest changes…"
+if [[ "${1-}" =~ ^(-s|--server)$ ]]; then
+  LIMIT="homelab-server"
+  TARGET_DESC="Remotely (homelab-server)"
+fi
+
+echo "→ Pulling latest changes…"
 git pull origin main
 
-echo "Running Ansible playbook to deploy all services…"
-# If you run this on the homelab server itself, limit to 'localhost'; 
-# if you run it remotely, limit to 'homelab-server'
+echo "→ Deploying services ${TARGET_DESC} with Ansible…"
 ANSIBLE_STDOUT_CALLBACK=debug \
 ANSIBLE_HOST_KEY_CHECKING=False \
 ansible-playbook \
   -i ansible/inventory/hosts.yml \
   ansible/playbook.yml \
-  --limit localhost \
+  --limit "${LIMIT}" \
   --ask-become-pass
 
-echo "Done."
+echo "✔ Deployment complete (${TARGET_DESC})."
