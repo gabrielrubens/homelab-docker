@@ -24,7 +24,6 @@
   "settings": {
     "ansible.python.interpreterPath": "/usr/bin/python3"
   },
-
   "remoteEnv": {
     "HOMELAB_DOCKER_PATH": "/Users/gabriel/dev/homelab-docker"
   }

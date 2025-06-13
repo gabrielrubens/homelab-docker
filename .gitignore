@@ -1,20 +1,20 @@
-# environment
+# Environment files
 .env
 
-# logs
+# Logs
 *.log
 
-# local compose overrides
+# Local compose overrides
 docker-compose.override.yml
 
 # -----------------------------
-# homelab runtime state
+# Homelab runtime state
 # -----------------------------
 
 # Netdata caches & data
 netdata/netdatacache/
 netdata/netdatalib/
-# (only ignore netdataconfig if you don't treat it as source-controlled)
+# (Optionally ignore netdataconfig if you regenerate it from template)
 # netdata/netdataconfig/
 
 # Pi-hole persistent data
@@ -25,14 +25,27 @@ pihole/etc-dnsmasq.d/
 homepage/config/logs/
 
 # Dashy user-data overrides
-# dashy/data/
-
-# Docker volumes (you likely never want host‐mounted volumes committed)
-# (optional, uncomment if desired)
-# /var/lib/docker/volumes/
+dashy/data/
 
 # -----------------------------
 # Ansible secrets / host_vars
 # -----------------------------
 ansible/host_vars/
 ansible/group_vars/localhost.yml
+ansible/group_vars/homelab-server.yml
+
+# -----------------------------
+# Miscellaneous
+# -----------------------------
+
+# OS/X files
+.DS_Store
+
+# VSCode workspace history
+.vscode/
+
+# Docker Desktop auto-generated settings
+docker-compose.override.yml
+
+# Ignore other unwanted local state
+*/.env
