@@ -1,0 +1,31 @@
+// .devcontainer/devcontainer.json
+{
+  "name": "Homelab Docker Dev",
+
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+
+  "remoteUser": "vscode",
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+
+  "extensions": [
+    "ms-ansible.ansible",
+    "ms-azuretools.vscode-docker",
+    "github.vscode-pull-request-github"
+  ],
+
+  "settings": {
+    "ansible.python.interpreterPath": "/usr/bin/python3"
+  },
+
+  "remoteEnv": {
+    "HOMELAB_DOCKER_PATH": "/Users/gabriel/dev/homelab-docker"
+  }
+}

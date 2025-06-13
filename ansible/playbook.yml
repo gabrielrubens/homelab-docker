@@ -1,0 +1,20 @@
+# ansible/playbook.yml
+---
+- name: Bootstrap Homelab Docker Stack
+  hosts: homelab
+  become: true
+
+  vars:
+    homelab_repo: https://github.com/gabrielrubens/homelab-docker.git
+    homelab_version: main
+
+  pre_tasks:
+    - name: Check for a local override compose file
+      stat:
+        path: "{{ homelab_dest }}/docker-compose.override.yml"
+      register: override_file
+
+  roles:
+    - git-clone
+    - docker-compose
+    - ufw

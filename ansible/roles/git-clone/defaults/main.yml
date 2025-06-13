@@ -1,0 +1,5 @@
+# ansinble/roles/git-clone/defaults/main.yml
+---
+homelab_repo: https://github.com/gabrielrubens/homelab-docker.git
+homelab_dest: /srv/homelab-docker
+homelab_version: main

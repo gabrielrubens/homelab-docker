@@ -1,0 +1,69 @@
+# ansible/roles/ufw/tasks/main.yml
+---
+- block:
+    - name: Ensure UFW is installed
+      apt:
+        name: ufw
+        state: present
+        update_cache: yes
+
+    - name: Ensure UFW is enabled
+      ufw:
+        state: enabled
+        logging: on
+
+    - name: Allow SSH
+      ufw:
+        rule: allow
+        name: OpenSSH
+
+    - name: Allow Dashy dashboard
+      ufw:
+        rule: allow
+        port: "{{ dashy_port }}"
+        proto: tcp
+
+    - name: Allow Homepage dashboard
+      ufw:
+        rule: allow
+        port: "{{ homepage_port }}"
+        proto: tcp
+
+    - name: Allow Glances system monitor
+      ufw:
+        rule: allow
+        port: "{{ glances_port }}"
+        proto: tcp
+
+    - name: Allow Netdata monitor
+      ufw:
+        rule: allow
+        port: "{{ netdata_port }}"
+        proto: tcp
+
+    - name: Allow Pi-hole DNS TCP
+      ufw:
+        rule: allow
+        port: 53
+        proto: tcp
+
+    - name: Allow Pi-hole DNS UDP
+      ufw:
+        rule: allow
+        port: 53
+        proto: udp
+
+    - name: Allow Pi-hole web UI (HTTP)
+      ufw:
+        rule: allow
+        port: 80
+        proto: tcp
+
+    - name: Allow Portainer (if used)
+      ufw:
+        rule: allow
+        port: 9000
+        proto: tcp
+
+  become: yes
+  when: ansible_connection != "local"

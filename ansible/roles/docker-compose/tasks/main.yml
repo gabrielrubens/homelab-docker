@@ -1,0 +1,55 @@
+# ansible/roles/docker-compose/tasks/main.yml
+---
+- name: Ensure apt cache is up to date
+  apt:
+    update_cache: yes
+
+- name: Install Docker Compose plugin via apt
+  apt:
+    name: docker-compose-plugin
+    state: present
+  register: dc_apt
+  failed_when: false
+
+- name: Ensure python3-pip is installed (for pip fallback & venv support)
+  apt:
+    name: python3-pip
+    state: present
+
+- name: Install distro Docker SDK & requests packages
+  apt:
+    name:
+      - python3-docker
+      - python3-requests
+    state: present
+
+- name: Install legacy docker-compose via pip3 if plugin not available
+  pip:
+    name: docker-compose
+    executable: pip3
+  when: dc_apt.failed
+
+- name: Build list of compose files
+  set_fact:
+    compose_files: >-
+      {{
+        [ 'docker-compose.yml' ]
+        + ( override_file.stat.exists | bool
+            and [ 'docker-compose.override.yml' ] or [] )
+      }}
+
+- name: Tear down any existing homelab stack
+  community.docker.docker_compose_v2:
+    project_src: "{{ homelab_dest }}"
+    files: "{{ compose_files }}"
+    state: absent
+    remove_orphans: true
+    remove_volumes: true
+
+- name: Bring up the full homelab stack
+  community.docker.docker_compose_v2:
+    project_src: "{{ homelab_dest }}"
+    files: "{{ compose_files }}"
+    state: present
+    pull: always
+    recreate: auto
