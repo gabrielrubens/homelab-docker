@@ -1,22 +1,22 @@
 # version: '3.8'
 
-services:
-  dashy:
-    image: ghcr.io/lissy93/dashy:latest
-    container_name: dashy
-    ports:
-      - "4000:8080"
-    volumes:
-      - type: bind
-        source: /var/lib/docker/volumes/portainer_data/_data/compose/11/dashy/conf.yml
-        target: /app/user-data/conf.yml
-      - type: bind
-        source: /var/lib/docker/volumes/portainer_data/_data/compose/11/dashy/glances-widgets.yml
-        target: /app/user-data/glances-widgets.yml
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "node", "/app/services/healthcheck"]
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+# services:
+#   dashy:
+#     image: ghcr.io/lissy93/dashy:latest
+#     container_name: dashy
+#     ports:
+#       - "4000:8080"
+#     volumes:
+#       - type: bind
+#         source: /var/lib/docker/volumes/portainer_data/_data/compose/11/dashy/conf.yml
+#         target: /app/user-data/conf.yml
+#       - type: bind
+#         source: /var/lib/docker/volumes/portainer_data/_data/compose/11/dashy/glances-widgets.yml
+#         target: /app/user-data/glances-widgets.yml
+#     restart: unless-stopped
+#     healthcheck:
+#       test: ["CMD", "node", "/app/services/healthcheck"]
+#       interval: 1m30s
+#       timeout: 10s
+#       retries: 3
+#       start_period: 40s

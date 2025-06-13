@@ -1,20 +1,20 @@
 # version: '3.8'
 
-services:
-  pihole:
-    image: pihole/pihole:latest
-    container_name: pihole
-    network_mode: "host"           # <<-- critical
-    cap_add:
-      - NET_ADMIN                  # DHCP requires this if you enable it
-      - SYS_TIME                   # only if you want Pi-Hole to set host clock
-    environment:
-      TZ: 'Europe/Lisbon'
-      FTLCONF_webserver_api_password: 'your-password'
-      FTLCONF_dns_listeningMode: 'all'
-      DNS1: '1.1.1.1'
-      DNS2: '1.0.0.1'
-    volumes:
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
-    restart: unless-stopped
+# services:
+#   pihole:
+#     image: pihole/pihole:latest
+#     container_name: pihole
+#     network_mode: "host"           # <<-- critical
+#     cap_add:
+#       - NET_ADMIN                  # DHCP requires this if you enable it
+#       - SYS_TIME                   # only if you want Pi-Hole to set host clock
+#     environment:
+#       TZ: 'Europe/Lisbon'
+#       FTLCONF_webserver_api_password: 'your-password'
+#       FTLCONF_dns_listeningMode: 'all'
+#       DNS1: '1.1.1.1'
+#       DNS2: '1.0.0.1'
+#     volumes:
+#       - './etc-pihole:/etc/pihole'
+#       - './etc-dnsmasq.d:/etc/dnsmasq.d'
+#     restart: unless-stopped

@@ -1,12 +1,20 @@
-# version: '2.4'
+# docker-compose.yml - Umbrella for Homelab Docker Services
 
 services:
-  pihole:
+  # pihole:
+  #   extends:
+  #     file: ./pihole/docker-compose.yml
+  #     service: pihole
+  #   # volumes:
+  #   #   - homelab_data:/data/shared
+
+  adguardhome:
     extends:
-      file: ./pihole/docker-compose.yml
-      service: pihole
-    # volumes:
-    #   - homelab_data:/data/shared
+      file: ./adguardhome/docker-compose.yml
+      service: adguardhome
+      # volumes:
+      #   - adguard_data:/opt/adguardhome/work
+      #   - adguard_config:/opt/adguardhome/conf
 
   netdata:
     extends:
@@ -23,25 +31,16 @@ services:
       file: ./homepage/docker-compose.yml
       service: homepage
 
-  dashy:
-    extends:
-      file: ./dashy/docker-compose.yml
-      service: dashy
+  # dashy:
+  #   extends:
+  #     file: ./dashy/docker-compose.yml
+  #     service: dashy
 
 
 
 volumes:
-#   homelab_data:
-#     driver: local
-#     driver_opts:
-#       o: bind
-#       type: none
-#       device: /home/gabriel/homelab-data   # host dir for all shared data
-  # Netdata named volumes
   netdataconfig:
   netdatalib:
   netdatacache:
-
-  # If you have other named volumes, declare them here too:
-  # dashy_data:
-  # pihole_data:
+  adguard_data:
+  adguard_config:

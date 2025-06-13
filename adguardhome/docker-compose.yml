@@ -1,0 +1,17 @@
+# adguardhome/docker-compose.yml
+services:
+  adguardhome:
+    image: adguard/adguardhome:latest
+    container_name: adguardhome
+    ports:
+      - "${adguard_ui_port:-3010}:3000/tcp"
+      - "${adguard_dns_port:-53}:53/udp"
+      - "${adguard_dns_port:-53}:53/tcp"
+    volumes:
+      - adguard_data:/opt/adguardhome/work
+      - adguard_config:/opt/adguardhome/conf
+    restart: unless-stopped
+
+volumes:
+  adguard_data: {}
+  adguard_config: {}
