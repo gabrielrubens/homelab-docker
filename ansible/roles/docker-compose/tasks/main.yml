@@ -46,6 +46,18 @@
     remove_orphans: true
     remove_volumes: true
 
+- name: Ensure AdGuard data directory has strict permissions
+  ansible.builtin.file:
+    path: /var/lib/docker/volumes/homelab-docker_adguard_data/_data
+    state: directory
+    mode: '0700'
+
+- name: Ensure AdGuard config directory has strict permissions
+  ansible.builtin.file:
+    path: /var/lib/docker/volumes/homelab-docker_adguard_config/_data
+    state: directory
+    mode: '0700'
+
 - name: Bring up the full homelab stack
   community.docker.docker_compose_v2:
     project_src: "{{ homelab_dest }}"
