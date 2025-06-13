@@ -15,7 +15,7 @@ docker-compose.override.yml
 netdata/netdatacache/
 netdata/netdatalib/
 # (Optionally ignore netdataconfig if you regenerate it from template)
-# netdata/netdataconfig/
+netdata/netdataconfig/
 
 # Pi-hole persistent data
 pihole/etc-pihole/
