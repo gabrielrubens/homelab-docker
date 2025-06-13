@@ -1,6 +1,0 @@
-# ansible/group_vars/all.yml
-
-dashy_port:    4000
-homepage_port: 3000
-glances_port:  61208
-netdata_port:  19999
