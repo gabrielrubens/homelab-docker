@@ -65,3 +65,16 @@
     state: present
     pull: always
     recreate: auto
+
+# Post-deploy: fix in-container permissions so AdGuard will serve its UI
+- name: Fix AdGuard “work” directory permissions in-container
+  ansible.builtin.command: >
+    docker exec adguardhome chmod 0700 /opt/adguardhome/work
+  become: true
+  when: inventory_hostname == 'homelab-server'
+
+- name: Fix AdGuard “conf” directory permissions in-container
+  ansible.builtin.command: >
+    docker exec adguardhome chmod 0700 /opt/adguardhome/conf
+  become: true
+  when: inventory_hostname == 'homelab-server'
