@@ -28,6 +28,11 @@ homepage/config/logs/
 # Dashy user-data overrides
 dashy/data/
 
+# Adguard Home persistent data
+adguardhome/adguard_data/
+adguardhome/adguard_conf/
+adguardhome/work/data/
+
 # -----------------------------
 # Ansible secrets / host_vars
 # -----------------------------
