@@ -4,9 +4,6 @@
 # Logs
 *.log
 
-# Local compose overrides
-docker-compose.override.yml
-
 # -----------------------------
 # Homelab runtime state
 # -----------------------------
@@ -48,9 +45,6 @@ adguardhome/conf/
 
 # VSCode workspace history
 .vscode/
-
-# Docker Desktop auto-generated settings
-docker-compose.override.yml
 
 # Ignore other unwanted local state
 */.env

@@ -2,9 +2,9 @@
 services:
   adguardhome:
     ports:
-      - "3010:80/tcp"   # Was: ${adguard_ui_port:-3010} - Hardcoded due to .env resolution issues
-      - "53:53/udp"     # Was: ${adguard_dns_port:-53} - Hardcoded due to .env resolution issues
-      - "53:53/tcp"     # Was: ${adguard_dns_port:-53} - Hardcoded due to .env resolution issues
+      - "${adguard_ui_port:-3010}:80/tcp"
+      - "${adguard_dns_port:-53}:53/udp"
+      - "${adguard_dns_port:-53}:53/tcp"
     volumes:
       - "${HOMELAB_DOCKER_PATH}/adguardhome/work:/opt/adguardhome/work:rw"
       - "${HOMELAB_DOCKER_PATH}/adguardhome/conf:/opt/adguardhome/conf:rw"
@@ -27,7 +27,7 @@ services:
 
   homepage:
     ports:
-      - "3020:3000/tcp" # Was: ${homepage_port:-3020} - Hardcoded due to .env resolution issues
+      - "${homepage_port:-3020}:3000/tcp"
     volumes:
       - "${HOMELAB_DOCKER_PATH}/homepage/config:/app/config:rw"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"

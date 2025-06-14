@@ -7,7 +7,5 @@ services:
       - ./config:/app/config:rw
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-      # homepage_port hardcoded to 3020 due to .env resolution issues for port variables
-      # HOMEPAGE_ALLOWED_HOSTS: homelab:${homepage_port},192.168.1.92:${homepage_port},localhost:${homepage_port}
-      HOMEPAGE_ALLOWED_HOSTS: homelab:3020,192.168.1.92:3020,localhost:3020
+      HOMEPAGE_ALLOWED_HOSTS: homelab:${homepage_port},192.168.1.92:${homepage_port},localhost:${homepage_port}
     restart: unless-stopped

@@ -5,6 +5,6 @@ homelab_dest: /srv/homelab-docker
 dashy_port:      4000
 homepage_port:   3020
 glances_port:    61208
-netdata_port:    19999 # ← any comment
+netdata_port:    19999
 adguard_dns_port: 53
 adguard_ui_port: 3010
