@@ -1,0 +1,36 @@
+# docker-compose.override.yml
+services:
+  adguardhome:
+    ports:
+      - "3010:80/tcp"   # Was: ${adguard_ui_port:-3010} - Hardcoded due to .env resolution issues
+      - "53:53/udp"     # Was: ${adguard_dns_port:-53} - Hardcoded due to .env resolution issues
+      - "53:53/tcp"     # Was: ${adguard_dns_port:-53} - Hardcoded due to .env resolution issues
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/adguardhome/work:/opt/adguardhome/work:rw"
+      - "${HOMELAB_DOCKER_PATH}/adguardhome/conf:/opt/adguardhome/conf:rw"
+
+  netdata:
+    ports:
+      - "${netdata_port:-19999}:19999"
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/netdata/netdataconfig:/etc/netdata:rw"
+      - "${HOMELAB_DOCKER_PATH}/netdata/netdatalib:/var/lib/netdata:rw"
+      - "${HOMELAB_DOCKER_PATH}/netdata/netdatacache:/var/cache/netdata:rw"
+
+  glances:
+    ports:
+      - "${glances_port:-61208}:61208"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/proc:/host/proc:ro"
+      - "/sys:/host/sys:ro"
+
+  homepage:
+    ports:
+      - "3020:3000/tcp" # Was: ${homepage_port:-3020} - Hardcoded due to .env resolution issues
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/homepage/config:/app/config:rw"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    environment:
+      - HOMEPAGE_VAR_ADGUARD_USERNAME=${ADGUARD_USERNAME}
+      - HOMEPAGE_VAR_ADGUARD_PASSWORD=${ADGUARD_PASSWORD}
