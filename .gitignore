@@ -29,6 +29,9 @@ dashy/data/
 adguardhome/work/
 adguardhome/conf/
 
+# Uptime Kuma persistent data
+uptime-kuma/data/
+
 # -----------------------------
 # Ansible secrets / host_vars
 # -----------------------------

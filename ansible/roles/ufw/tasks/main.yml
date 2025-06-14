@@ -73,6 +73,14 @@
         comment: "Allow AdGuard Home Web UI (Port {{ adguard_ui_port }})"
       when: adguard_ui_port is defined
 
+    - name: Allow Uptime Kuma UI
+      community.general.ufw:
+        rule: allow
+        port: "{{ uptime_kuma_port }}"
+        proto: tcp
+        comment: "Allow Uptime Kuma monitoring UI (Port {{ uptime_kuma_port }})"
+      when: uptime_kuma_port is defined
+
   become: yes
   when: ansible_connection != "local"
 

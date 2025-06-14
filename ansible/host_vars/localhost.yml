@@ -7,3 +7,4 @@ glances_port:    61208
 netdata_port:    19999
 adguard_dns_port: 53
 adguard_ui_port: 3010   # ← where the AdGuard UI will live on the host
+uptime_kuma_port: 3001
