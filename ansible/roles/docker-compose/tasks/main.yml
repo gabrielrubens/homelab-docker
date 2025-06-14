@@ -57,6 +57,13 @@
     mode: '0700'
     recurse: yes
 
+- name: Ensure .env file is configured on the server from template
+  ansible.builtin.template:
+    src: .env.j2
+    dest: "{{ homelab_dest }}/.env"
+    mode: '0600' # Secure permissions for a file that might contain secrets
+  when: ansible_connection != "local"
+
 - name: Tear down any existing homelab stack
   community.docker.docker_compose_v2:
     project_src: "{{ homelab_dest }}"
