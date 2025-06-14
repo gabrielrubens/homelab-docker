@@ -35,9 +35,9 @@ adguardhome/conf/
 # -----------------------------
 # Ansible secrets / host_vars
 # -----------------------------
-ansible/host_vars/
-ansible/group_vars/localhost.yml
-ansible/group_vars/homelab-server.yml
+# ansible/host_vars/
+#ansible/group_vars/localhost.yml
+#ansible/group_vars/homelab-server.yml
 
 # -----------------------------
 # Miscellaneous
