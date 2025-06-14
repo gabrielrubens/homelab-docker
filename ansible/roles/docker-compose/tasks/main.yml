@@ -71,7 +71,8 @@
     state: absent
     remove_orphans: true
     remove_volumes: true
-    env_file: "{{ homelab_dest }}/.env"
+    env_files: # Corrected from env_file to env_files
+      - "{{ homelab_dest }}/.env"
 
 - name: Bring up the full homelab stack
   community.docker.docker_compose_v2:
@@ -80,7 +81,8 @@
     state: present
     pull: always
     recreate: auto
-    env_file: "{{ homelab_dest }}/.env"
+    env_files: # Corrected from env_file to env_files
+      - "{{ homelab_dest }}/.env"
 
 # Post-deploy: fix in-container permissions so AdGuard will serve its UI
 - name: Fix AdGuard “work” directory permissions in-container
