@@ -17,11 +17,11 @@
         rule: allow
         name: OpenSSH
 
-    - name: Allow Dashy dashboard
-      ufw:
-        rule: allow
-        port: "{{ dashy_port }}"
-        proto: tcp
+    # - name: Allow Dashy dashboard
+    #   ufw:
+    #     rule: allow
+    #     port: "{{ dashy_port }}"
+    #     proto: tcp
 
     - name: Allow Homepage dashboard
       ufw:
