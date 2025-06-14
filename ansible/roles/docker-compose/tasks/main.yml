@@ -29,14 +29,33 @@
     executable: pip3
   when: dc_apt.failed
 
+- name: Check if override file exists
+  ansible.builtin.stat:
+    path: "{{ homelab_dest }}/docker-compose.override.yml"
+  register: override_file_stat
+
 - name: Build list of compose files
   set_fact:
     compose_files: >-
       {{
         [ 'docker-compose.yml' ]
-        + ( override_file.stat.exists | bool
+        + ( override_file_stat.stat.exists | bool
             and [ 'docker-compose.override.yml' ] or [] )
       }}
+
+- name: Ensure AdGuard host work directory exists and has strict permissions
+  ansible.builtin.file:
+    path: "{{ homelab_dest }}/adguardhome/work"
+    state: directory
+    mode: '0700'
+    recurse: yes
+
+- name: Ensure AdGuard host conf directory exists and has strict permissions
+  ansible.builtin.file:
+    path: "{{ homelab_dest }}/adguardhome/conf"
+    state: directory
+    mode: '0700'
+    recurse: yes
 
 - name: Tear down any existing homelab stack
   community.docker.docker_compose_v2:
@@ -45,18 +64,6 @@
     state: absent
     remove_orphans: true
     remove_volumes: true
-
-- name: Ensure AdGuard data directory has strict permissions
-  ansible.builtin.file:
-    path: /var/lib/docker/volumes/homelab-docker_adguard_data/_data
-    state: directory
-    mode: '0700'
-
-- name: Ensure AdGuard config directory has strict permissions
-  ansible.builtin.file:
-    path: /var/lib/docker/volumes/homelab-docker_adguard_config/_data
-    state: directory
-    mode: '0700'
 
 - name: Bring up the full homelab stack
   community.docker.docker_compose_v2:

@@ -29,9 +29,9 @@ homepage/config/logs/
 dashy/data/
 
 # Adguard Home persistent data
-adguardhome/adguard_data/
-adguardhome/adguard_conf/
-adguardhome/work/data/
+adguardhome/work/ # For persistent work data
+adguardhome/conf/ # For persistent configuration, including AdGuardHome.yaml
+adguardhome/conf/AdGuardHome.yaml
 
 # -----------------------------
 # Ansible secrets / host_vars

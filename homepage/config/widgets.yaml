@@ -8,3 +8,8 @@
     memory: true
     disk: /
     alerts: true
+
+# - adguard:
+#     url: http://adguardhome:80
+#     username: "{{HOMEPAGE_VAR_ADGUARD_USERNAME}}"
+#     password: "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}"

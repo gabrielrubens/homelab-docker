@@ -14,6 +14,10 @@
           icon: portainer.png
 
 - Network & Monitoring:
+    - AdGuard-Home:
+        - abbr: AG
+          href: http://192.168.1.92:3010
+          icon: adguard-home.png
     - Pi-hole:
         - abbr: PH
           href: http://192.168.1.92/admin
@@ -30,5 +34,5 @@
 - Self:
     - Homepage.dev:
         - abbr: HP
-          href: http://192.168.1.92:3000
+          href: http://192.168.1.92:3010
           icon: homepage.png

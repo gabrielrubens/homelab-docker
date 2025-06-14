@@ -1,8 +1,8 @@
 # ansible/group_vars/all.yml
 
-dashy_port:       4000
-homepage_port:    3020
-glances_port:     61208
-netdata_port:     19999
+dashy_port:      4000
+homepage_port:   3020   # ← change to 3010 for your local dev, 3000 for prod
+glances_port:    61208
+netdata_port:    19999
 adguard_dns_port: 53
-adguard_ui_port:  3010
+adguard_ui_port: 3010   # ← where the AdGuard UI will live on the host
