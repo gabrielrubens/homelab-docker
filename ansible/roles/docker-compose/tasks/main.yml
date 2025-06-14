@@ -71,19 +71,8 @@
     state: absent
     remove_orphans: true
     remove_volumes: true
-    env_files:
+    env_files: # This should be sufficient
       - "{{ homelab_dest }}/.env"
-    env:
-      # Explicitly set variables that seem to be problematic
-      # Values are sourced from Ansible variables
-      homepage_port: "{{ homepage_port }}"
-      adguard_ui_port: "{{ adguard_ui_port }}"
-      adguard_dns_port: "{{ adguard_dns_port }}"
-      # We can add others if they also show issues, but start with these.
-      # HOMELAB_DOCKER_PATH is also crucial and in the .env file.
-      # Docker Compose should pick it up from .env, but if issues persist,
-      # we could add it here too:
-      # HOMELAB_DOCKER_PATH: "{{ homelab_dest }}"
 
 - name: Bring up the full homelab stack
   community.docker.docker_compose_v2:
@@ -92,14 +81,8 @@
     state: present
     pull: always
     recreate: auto
-    env_files:
+    env_files: # This should be sufficient
       - "{{ homelab_dest }}/.env"
-    env:
-      # Explicitly set variables that seem to be problematic
-      homepage_port: "{{ homepage_port }}"
-      adguard_ui_port: "{{ adguard_ui_port }}"
-      adguard_dns_port: "{{ adguard_dns_port }}"
-      # HOMELAB_DOCKER_PATH: "{{ homelab_dest }}"
 
 # Post-deploy: fix in-container permissions so AdGuard will serve its UI
 - name: Fix AdGuard “work” directory permissions in-container
