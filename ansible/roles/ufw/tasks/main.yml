@@ -2,89 +2,100 @@
 ---
 - block:
     - name: Ensure UFW is installed
-      apt:
+      ansible.builtin.apt:
         name: ufw
         state: present
-        update_cache: yes
 
     - name: Ensure UFW is enabled
-      ufw:
+      community.general.ufw:
         state: enabled
-        logging: on
+        policy: deny # Deny incoming by default
 
     - name: Allow SSH
-      ufw:
+      community.general.ufw:
         rule: allow
-        name: OpenSSH
-
-    # - name: Allow Dashy dashboard
-    #   ufw:
-    #     rule: allow
-    #     port: "{{ dashy_port }}"
-    #     proto: tcp
+        name: OpenSSH # Using the application profile
+        comment: "Allow SSH connections"
 
     - name: Allow Homepage dashboard
-      ufw:
+      community.general.ufw:
         rule: allow
         port: "{{ homepage_port }}"
         proto: tcp
+        comment: "Allow Homepage dashboard UI (Port {{ homepage_port }})"
+      when: homepage_port is defined
 
     - name: Allow Glances system monitor
-      ufw:
+      community.general.ufw:
         rule: allow
         port: "{{ glances_port }}"
         proto: tcp
+        comment: "Allow Glances system monitor UI (Port {{ glances_port }})"
+      when: glances_port is defined
 
     - name: Allow Netdata monitor
-      ufw:
+      community.general.ufw:
         rule: allow
         port: "{{ netdata_port }}"
         proto: tcp
+        comment: "Allow Netdata real-time monitor UI (Port {{ netdata_port }})"
+      when: netdata_port is defined
 
-    # - name: Allow Pi-hole DNS TCP
-    #   ufw:
-    #     rule: allow
-    #     port: 53
-    #     proto: tcp
-
-    # - name: Allow Pi-hole DNS UDP
-    #   ufw:
-    #     rule: allow
-    #     port: 53
-    #     proto: udp
-
-    # - name: Allow Pi-hole web UI (HTTP)
-    #   ufw:
-    #     rule: allow
-    #     port: 80
-    #     proto: tcp
-
-    - name: Allow Portainer (if used)
-      ufw:
+    - name: Allow Portainer
+      community.general.ufw:
         rule: allow
-        port: 9000
+        port: "{{ portainer_port | default('9000') }}"
         proto: tcp
+        comment: "Allow Portainer UI (Port {{ portainer_port | default('9000') }})"
+      when: portainer_port is defined or true # Assuming Portainer is always deployed or has a default
 
-    - name: Allow AdGuard DNS (TCP)
-      ufw:
+    - name: Allow AdGuard Home DNS (TCP)
+      community.general.ufw:
         rule: allow
         port: "{{ adguard_dns_port }}"
         proto: tcp
-        comment: "Allow AdGuard Home DNS"
+        comment: "Allow AdGuard Home DNS (TCP Port {{ adguard_dns_port }})"
+      when: adguard_dns_port is defined
 
-    - name: Allow AdGuard DNS (UDP)
-      ufw:
+    - name: Allow AdGuard Home DNS (UDP)
+      community.general.ufw:
         rule: allow
         port: "{{ adguard_dns_port }}"
         proto: udp
-        comment: "Allow AdGuard Home DNS"
+        comment: "Allow AdGuard Home DNS (UDP Port {{ adguard_dns_port }})"
+      when: adguard_dns_port is defined
 
-    - name: Allow AdGuard Web UI
-      ufw:
+    - name: Allow AdGuard Home Web UI
+      community.general.ufw:
         rule: allow
         port: "{{ adguard_ui_port }}"
         proto: tcp
-        comment: "Allow AdGuard Home Web UI"
+        comment: "Allow AdGuard Home Web UI (Port {{ adguard_ui_port }})"
+      when: adguard_ui_port is defined
 
   become: yes
   when: ansible_connection != "local"
+
+# - name: Allow Dashy dashboard
+#   community.general.ufw:
+#     rule: allow
+#     port: "{{ dashy_port }}"
+#     proto: tcp
+#     comment: "Allow Dashy dashboard UI (Port {{ dashy_port }})"
+#   when: dashy_port is defined and dashy_port != "" # Ensure dashy_port is defined and not empty
+
+# The following rules are commented out as they might not be needed.
+# Review and uncomment if a service is actively using these host ports.
+# - name: Allow HTTP (Port 80)
+#   community.general.ufw:
+#     rule: allow
+#     port: "80"
+#     proto: tcp
+#     comment: "Allow generic HTTP (Port 80) - Review if needed"
+#
+# - name: Allow TCP on Port 3000
+#   community.general.ufw:
+#     rule: allow
+#     port: "3000"
+#     proto: tcp
+#     comment: "Allow generic TCP on Port 3000 - Review if needed"
