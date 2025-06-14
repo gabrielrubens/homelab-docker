@@ -2,7 +2,7 @@
 services:
   adguardhome:
     ports:
-      - "${adguard_ui_port:-3010}:80/tcp"
+      - "${adguard_ui_port:-3010}:3000/tcp"  # Changed container port from 80 to 3000 - "${adguard_ui_port:-3010}:80/tcp"
       - "${adguard_dns_port:-53}:53/udp"
       - "${adguard_dns_port:-53}:53/tcp"
     volumes:
