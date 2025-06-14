@@ -3,8 +3,8 @@
 homelab_dest: /srv/homelab-docker
 
 dashy_port:      4000
-homepage_port:   3020   # ← change to 3010 for your local dev, 3000 for prod
+homepage_port:   3020
 glances_port:    61208
-netdata_port:    19999
+netdata_port:    19999 # ← any comment
 adguard_dns_port: 53
-adguard_ui_port: 3010   # ← where the AdGuard UI will live on the host
+adguard_ui_port: 3010
