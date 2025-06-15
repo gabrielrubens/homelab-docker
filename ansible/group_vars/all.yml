@@ -7,3 +7,4 @@ netdata_port:    19999
 adguard_dns_port: 53
 adguard_ui_port: 3010
 uptime_kuma_port: 3001
+openspeedtest_port: 3003

@@ -36,6 +36,11 @@ services:
       file: ./uptime-kuma/docker-compose.yml
       service: uptime-kuma
 
+  openspeedtest:
+    extends:
+      file: ./openspeedtest/docker-compose.yml
+      service: openspeedtest
+
   # dashy:
   #   extends:
   #     file: ./dashy/docker-compose.yml

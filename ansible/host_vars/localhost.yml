@@ -1,5 +1,6 @@
 # ansible/host_vars/localhost.yml
 homelab_dest: /workspace
+homelab_ip: "localhost"
 
 dashy_port:      4000
 homepage_port:   3020   # ← change to 3010 for your local dev, 3000 for prod
@@ -8,3 +9,4 @@ netdata_port:    19999
 adguard_dns_port: 53
 adguard_ui_port: 3010   # ← where the AdGuard UI will live on the host
 uptime_kuma_port: 3001
+openspeedtest_port: 3003

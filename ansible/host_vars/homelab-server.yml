@@ -1,6 +1,6 @@
 # ansible/host_vars/homelab-server.yml
-
 homelab_dest: /srv/homelab-docker
+homelab_ip: "192.168.1.92"
 
 dashy_port:      4000
 homepage_port:   3020
@@ -9,3 +9,4 @@ netdata_port:    19999
 adguard_dns_port: 53
 adguard_ui_port: 3010
 uptime_kuma_port: 3001
+openspeedtest_port: 3003

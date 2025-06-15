@@ -40,3 +40,7 @@ services:
       - "${uptime_kuma_port:-3001}:3001/tcp"
     volumes:
       - "${HOMELAB_DOCKER_PATH}/uptime-kuma/data:/app/data:rw"
+
+  openspeedtest:
+    ports:
+      - "${openspeedtest_port:-3003}:3000/tcp" # Internal port for OpenSpeedTest is 3000

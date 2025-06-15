@@ -30,6 +30,9 @@
         - abbr: GL
           href: http://192.168.1.92:61208
           icon: glances.png
+    - OpenSpeedTest:
+        - abbr: OST
+          href: http://192.168.1.92:3003
 
 - Self:
     - Homepage.dev:
