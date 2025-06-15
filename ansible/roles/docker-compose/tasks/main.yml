@@ -1,30 +1,30 @@
 # ansible/roles/docker-compose/tasks/main.yml
 ---
 - name: Ensure apt cache is up to date
-  apt:
+  ansible.builtin.apt:
     update_cache: yes
 
 - name: Install Docker Compose plugin via apt
-  apt:
+  ansible.builtin.apt:
     name: docker-compose-plugin
     state: present
   register: dc_apt
   failed_when: false
 
 - name: Ensure python3-pip is installed (for pip fallback & venv support)
-  apt:
+  ansible.builtin.apt:
     name: python3-pip
     state: present
 
 - name: Install distro Docker SDK & requests packages
-  apt:
+  ansible.builtin.apt:
     name:
       - python3-docker
       - python3-requests
     state: present
 
 - name: Install legacy docker-compose via pip3 if plugin not available
-  pip:
+  ansible.builtin.pip:
     name: docker-compose
     executable: pip3
   when: dc_apt.failed
@@ -35,7 +35,7 @@
   register: override_file_stat
 
 - name: Build list of compose files
-  set_fact:
+  ansible.builtin.set_fact:
     compose_files: >-
       {{
         [ 'docker-compose.yml' ]
@@ -117,7 +117,7 @@
     state: absent
     remove_orphans: true
     remove_volumes: true
-    env_files: # This should be sufficient
+    env_files:
       - "{{ homelab_dest }}/.env"
 
 - name: Bring up the full homelab stack
@@ -126,8 +126,8 @@
     files: "{{ compose_files }}"
     state: present
     pull: always
-    recreate: auto
-    env_files: # This should be sufficient
+    recreate: auto # Consider 'smart' or 'always' based on your needs
+    env_files:
       - "{{ homelab_dest }}/.env"
 
 # Post-deploy: fix in-container permissions so AdGuard will serve its UI
