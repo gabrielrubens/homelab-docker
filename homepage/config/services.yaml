@@ -2,6 +2,18 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/services/
 
+- My Homelab Status: # This is the group title that will appear on Homepage
+    - Uptime Kuma:
+        widget:
+        type: uptimekuma
+        url: http://192.168.1.92:3001  # Base URL of your Uptime Kuma instance
+        slug: homelab-status          # The slug of the status page you created in Uptime Kuma
+        # Optional parameters (refer to Homepage documentation for more):
+        # title: "Live Service Status" # Override the title from Uptime Kuma for the widget
+        # columns: 3                   # Number of columns for monitors display
+        # showTags: true               # If you want to display tags from Uptime Kuma
+        # hideDownMonitors: false      # Set to true if you want to hide monitors that are down
+
 - Homelab Tools:
     - Glances:
         href: http://192.168.1.92:61208
