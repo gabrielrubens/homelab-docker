@@ -55,7 +55,7 @@ services:
       - PUID=${PUID:-1000}
       - PGID=${PGID:-1000}
       - TZ=${TZ:-Europe/Lisbon} # Changed: Substituted from TZ in .env
-      - SERVERURL=${WIREGUARD_SERVERURL:vpn.vidafora.com} # Changed: Substituted from WIREGUARD_SERVERURL in .env
+      - SERVERURL=${WIREGUARD_SERVERURL:-vpn.vidafora.com} # Changed: Substituted from WIREGUARD_SERVERURL in .env
       - SERVERPORT=${wireguard_port:-45000}    # Uses wireguard_port from .env
       - PEERS=${WIREGUARD_PEERS:-1}             # Changed: Substituted from WIREGUARD_PEERS in .env
       #- PEERDNS=${WIREGUARD_PEERDNS:-auto}      # Changed: Substituted from WIREGUARD_PEERDNS in .env
