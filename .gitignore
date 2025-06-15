@@ -32,6 +32,9 @@ adguardhome/conf/
 # Uptime Kuma persistent data
 uptime-kuma/data/
 
+# WireGuard persistent data
+wireguard/config/
+
 # -----------------------------
 # Ansible secrets / host_vars
 # -----------------------------
