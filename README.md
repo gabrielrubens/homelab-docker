@@ -220,6 +220,142 @@ ansible/group_vars/localhost.yml
 
 ---
 
+## How to Add a New App/Container
+
+This section outlines the general steps to add a new Dockerized application to this homelab setup.
+
+**Prerequisites:**
+*   Basic understanding of Docker and Docker Compose.
+*   Familiarity with the project structure.
+
+**Steps:**
+
+1.  **Create the App's Docker Compose File:**
+    *   Create a new directory for the application under `/workspace/` (e.g., `/workspace/newapp/`).
+    *   Inside this directory, create a `docker-compose.yml` file (e.g., `/workspace/newapp/docker-compose.yml`).
+    *   Define the service for your new application. At a minimum, this usually includes `image`, `container_name`, and `restart` policy.
+        ```yaml
+        # /workspace/newapp/docker-compose.yml
+        services:
+          newapp:
+            image: vendor/newapp-image:latest
+            container_name: newapp
+            restart: unless-stopped
+            # Ports and volumes are typically defined in the root docker-compose.override.yml
+        ```
+
+2.  **Include the New App in the Main `docker-compose.yml`:**
+    *   Edit the root `/workspace/docker-compose.yml` file.
+    *   Add an entry for your new service using the `extends` keyword to include its configuration.
+        ```yaml
+        # /workspace/docker-compose.yml
+        services:
+          # ... other services ...
+          newapp:
+            extends:
+              file: ./newapp/docker-compose.yml
+              service: newapp
+        ```
+
+3.  **Configure Ports and Volumes in `docker-compose.override.yml`:**
+    *   Edit the root `/workspace/docker-compose.override.yml` file.
+    *   Add a service block for `newapp`.
+    *   **Ports:** Map a host port to the container's exposed port. Use an environment variable for the host port (e.g., `${newapp_port:-default_port_here}`).
+    *   **Volumes:** If the application requires persistent storage, define volume mappings. Use the `${HOMELAB_DOCKER_PATH}` variable for server-side path consistency.
+        ```dockercompose
+        # /workspace/docker-compose.override.yml
+        services:
+          # ... other services ...
+          newapp:
+            ports:
+              - "${newapp_port:-300X}:<container_internal_port>/tcp"
+            volumes: # Optional, if needed
+              - "${HOMELAB_DOCKER_PATH}/newapp/data:/path/inside/container:rw"
+        ```
+
+4.  **Define Ansible Variables for the App's Port:**
+    *   This allows for different port configurations for local and server environments.
+    *   **`ansible/group_vars/all.yml`:** Add a default port for the new app.
+        ```yaml
+        # ansible/group_vars/all.yml
+        # ...
+        newapp_port: 300X # Default port
+        ```
+    *   **`ansible/host_vars/localhost.yml`:** (Optional) Override for local deployment.
+        ```yaml
+        # ansible/host_vars/localhost.yml
+        # ...
+        newapp_port: 300X
+        ```
+    *   **`ansible/host_vars/homelab-server.yml`:** (Optional) Override for server deployment.
+        ```yaml
+        # ansible/host_vars/homelab-server.yml
+        # ...
+        newapp_port: 300X
+        ```
+
+5.  **Add the New Port Variable to `.env.j2` Template:**
+    *   Edit `/workspace/ansible/roles/docker-compose/templates/.env.j2`.
+    *   This ensures Ansible generates the `.env` file with the correct port variable for Docker Compose to use.
+        ```bash
+        # /workspace/ansible/roles/docker-compose/templates/.env.j2
+        # ...
+        newapp_port={{ newapp_port }}
+        ```
+
+6.  **Add UFW Rule (for Server Deployment):**
+    *   Edit `/workspace/ansible/roles/ufw/tasks/main.yml`.
+    *   Add a task to allow traffic on the new app's host port.
+        ```yaml
+        # /workspace/ansible/roles/ufw/tasks/main.yml
+        # ...
+        - name: Allow NewApp UI
+          community.general.ufw:
+            rule: allow
+            port: "{{ newapp_port }}"
+            proto: tcp
+            comment: "Allow NewApp UI (Port {{ newapp_port }})"
+          when: newapp_port is defined
+        ```
+
+7.  **(Optional) Add to Homepage Configuration:**
+    *   Edit `/workspace/homepage/config/bookmarks.yaml`:
+        *   Add a bookmark entry.
+        *   **Note on `href`:** Since Homepage configuration files are not currently templated by Ansible for dynamic IP/port substitution, you'll need to use a fixed IP (`localhost` or your server's IP like `192.168.1.92`) and the actual port number.
+            ```yaml
+            # /workspace/homepage/config/bookmarks.yaml
+            # ...
+            - My New Apps: # Or any other relevant group
+                - NewApp:
+                    - abbr: NA
+                      href: http://<IP_OR_LOCALHOST>:<actual_newapp_port_number> # e.g., http://localhost:300X or http://192.168.1.92:300X
+                      icon: newapp.png # Add newapp.png to /workspace/homepage/config/icons/
+            ```
+        *   You'll need to decide if the link should point to `localhost` (for local access) or the server IP. If you access Homepage from both environments, one set of links might not work correctly without further customization or templating.
+    *   Edit `/workspace/homepage/config/services.yaml` (if adding a widget):
+        *   Follow Homepage documentation to add a service widget if applicable. Similar considerations for URLs apply.
+
+8.  **Create App Directory and Commit:**
+    *   Ensure the app's directory (e.g., `/workspace/newapp/`) is created.
+    *   Commit all your changes to Git:
+        ```bash
+        git add .
+        git commit -m "feat: Add newapp application"
+        git push
+        ```
+
+9.  **Deploy and Test:**
+    *   For local deployment: `./deploy.sh`
+    *   For server deployment: `./deploy.sh --server`
+    *   Verify the application is running (`docker ps`), accessible on its port, and any persistent data is correctly mapped. Check `docker logs newapp` for issues.
+
+**Important Considerations:**
+*   **Icons:** For Homepage bookmarks/widgets, place corresponding icon files (e.g., `newapp.png`) in `/workspace/homepage/config/icons/`.
+*   **Persistent Data:** Carefully consider the application's data persistence needs and configure volumes appropriately.
+*   **Environment Variables:** If the new app requires specific environment variables beyond ports, define them in `/workspace/docker-compose.override.yml` under the service's `environment:` section. These can also be sourced from the `.env` file if needed.
+
+---
+
 ### Enjoy your fully automated Homelab!
 
 ```bash
