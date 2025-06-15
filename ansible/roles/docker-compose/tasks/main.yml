@@ -43,6 +43,13 @@
             and [ 'docker-compose.override.yml' ] or [] )
       }}
 
+- name: Ensure .env file is configured on the server from template
+  ansible.builtin.template:
+    src: .env.j2
+    dest: "{{ homelab_dest }}/.env"
+    mode: '0600' # Secure permissions for a file that might contain secrets
+  when: ansible_connection != "local"
+
 - name: Ensure AdGuard host work directory exists and has strict permissions
   ansible.builtin.file:
     path: "{{ homelab_dest }}/adguardhome/work"
@@ -57,12 +64,44 @@
     mode: '0700'
     recurse: yes
 
-- name: Ensure .env file is configured on the server from template
-  ansible.builtin.template:
-    src: .env.j2
-    dest: "{{ homelab_dest }}/.env"
-    mode: '0600' # Secure permissions for a file that might contain secrets
-  when: ansible_connection != "local"
+- name: Ensure kmod is installed (provides modprobe)
+  ansible.builtin.apt:
+    name: kmod
+    state: present
+  become: yes # kmod package installation requires root privileges
+
+- name: Ensure wireguard-tools is installed
+  ansible.builtin.apt:
+    name: wireguard-tools
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: Ensure wireguard kernel module is loaded on server
+  community.general.modprobe:
+    name: wireguard
+    state: present
+  become: yes
+  when: ansible_connection != "local" # Skip in dev container
+
+- name: Ensure IP forwarding is enabled on server
+  ansible.posix.sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    sysctl_set: yes
+    state: present
+    reload: yes
+  become: yes
+  when: ansible_connection != "local" # Skip in dev container
+
+- name: Allow WireGuard UDP port in UFW on server
+  community.general.ufw:
+    rule: allow
+    port: "{{ wireguard_port | default('45000') }}" # Ensure 'wireguard_port' is defined in your Ansible vars
+    proto: udp
+    comment: "Allow WireGuard VPN"
+  become: yes
+  when: ansible_connection != "local" # Skip in dev container
 
 - name: Ensure WireGuard config directory exists on server
   ansible.builtin.file:
@@ -96,10 +135,10 @@
   ansible.builtin.command: >
     docker exec adguardhome chmod 0700 /opt/adguardhome/work
   become: true
-  when: inventory_hostname == 'homelab-server'
+  when: inventory_hostname == 'homelab-server' # Or ansible_connection != "local" if 'homelab-server' isn't always the target
 
 - name: Fix AdGuard “conf” directory permissions in-container
   ansible.builtin.command: >
     docker exec adguardhome chmod 0700 /opt/adguardhome/conf
   become: true
-  when: inventory_hostname == 'homelab-server'
+  when: inventory_hostname == 'homelab-server' # Or ansible_connection != "local" if 'homelab-server' isn't always the target
