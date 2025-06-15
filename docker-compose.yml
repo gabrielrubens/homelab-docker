@@ -41,6 +41,11 @@ services:
       file: ./openspeedtest/docker-compose.yml
       service: openspeedtest
 
+  wireguard: # Add WireGuard service
+    extends:
+      file: ./wireguard/docker-compose.yml
+      service: wireguard
+
   # dashy:
   #   extends:
   #     file: ./dashy/docker-compose.yml

@@ -89,29 +89,13 @@
         comment: "Allow OpenSpeedTest UI (Port {{ openspeedtest_port }})"
       when: openspeedtest_port is defined
 
+    - name: Allow WireGuard (UDP)
+      community.general.ufw:
+        rule: allow
+        port: "{{ wireguard_port }}"
+        proto: udp
+        comment: "Allow WireGuard VPN (UDP Port {{ wireguard_port }})"
+      when: wireguard_port is defined
+
   become: yes
   when: ansible_connection != "local"
-
-# - name: Allow Dashy dashboard
-#   community.general.ufw:
-#     rule: allow
-#     port: "{{ dashy_port }}"
-#     proto: tcp
-#     comment: "Allow Dashy dashboard UI (Port {{ dashy_port }})"
-#   when: dashy_port is defined and dashy_port != "" # Ensure dashy_port is defined and not empty
-
-# The following rules are commented out as they might not be needed.
-# Review and uncomment if a service is actively using these host ports.
-# - name: Allow HTTP (Port 80)
-#   community.general.ufw:
-#     rule: allow
-#     port: "80"
-#     proto: tcp
-#     comment: "Allow generic HTTP (Port 80) - Review if needed"
-#
-# - name: Allow TCP on Port 3000
-#   community.general.ufw:
-#     rule: allow
-#     port: "3000"
-#     proto: tcp
-#     comment: "Allow generic TCP on Port 3000 - Review if needed"

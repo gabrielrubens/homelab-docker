@@ -10,3 +10,7 @@ adguard_dns_port: 53
 adguard_ui_port: 3010   # ← where the AdGuard UI will live on the host
 uptime_kuma_port: 3001
 openspeedtest_port: 3003
+#wireguard_port: 51820
+wireguard_port: 45000
+wireguard_server_url: "localhost" # For local testing, SERVERURL might be 'localhost' or the host IP
+wireguard_peers: "phone,laptop"

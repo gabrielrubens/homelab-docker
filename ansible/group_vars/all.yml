@@ -8,3 +8,10 @@ adguard_dns_port: 53
 adguard_ui_port: 3010
 uptime_kuma_port: 3001
 openspeedtest_port: 3003
+
+# WireGuard configuration
+# You might want to define PUID/PGID/TZ here too if they are consistent
+wireguard_port: 45000
+PUID: 1000
+PGID: 1000
+TZ: Europe/Lisbon

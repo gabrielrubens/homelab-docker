@@ -64,6 +64,13 @@
     mode: '0600' # Secure permissions for a file that might contain secrets
   when: ansible_connection != "local"
 
+- name: Ensure WireGuard config directory exists on server
+  ansible.builtin.file:
+    path: "{{ homelab_dest }}/wireguard/config"
+    state: directory
+    mode: '0750' # Restrictive permissions
+  when: ansible_connection != "local" # Only for server deployment
+
 - name: Tear down any existing homelab stack
   community.docker.docker_compose_v2:
     project_src: "{{ homelab_dest }}"
