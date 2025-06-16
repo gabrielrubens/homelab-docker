@@ -108,7 +108,7 @@
 - name: Allow WireGuard UDP port in UFW on server
   community.general.ufw:
     rule: allow
-    port: "{{ wireguard_port | default('45000') }}" # Ensure 'wireguard_port' is defined in your Ansible vars
+    port: "{{ wireguard_int_port | default('51820') }}" # Ensure 'wireguard_int_port' is defined in your Ansible vars
     proto: udp
     comment: "Allow WireGuard VPN"
   become: yes

@@ -52,8 +52,10 @@ services:
     security_opt:
       - "apparmor:unconfined"
     restart: unless-stopped
+    # For network_mode: host, this port mapping is informational; 
+    # the container listens on wireguard_int_port directly on the host.
     ports:
-      - "${wireguard_port:-45000}:51820/udp"
+      - "${wireguard_ext_port:-45000}:${wireguard_int_port:-51820}/udp" 
     volumes:
       - "${HOMELAB_DOCKER_PATH}/wireguard/config:/config:rw"
       - "/lib/modules:/lib/modules:ro"
@@ -62,9 +64,8 @@ services:
       - PGID=${PGID:-1000}
       - TZ=${TZ:-Europe/Lisbon}
       - SERVERURL=${WIREGUARD_SERVERURL:-vpn.vidafora.com}
-      - SERVERPORT=${wireguard_port:-45000}
-      - PEERS=2
-      # - PEERS=phone,laptop
+      - SERVERPORT=${wireguard_ext_port:-45000} # Clients connect to this external port
+      - PEERS=${wireguard_peers:-1} # Using the variable from host_vars
       - PEERDNS=off
       - INTERNAL_SUBNET=${WIREGUARD_INTERNAL_SUBNET:-10.13.13.0/24}
       - ALLOWEDIPS=0.0.0.0/0, ::/0

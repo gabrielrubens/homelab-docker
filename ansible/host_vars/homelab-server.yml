@@ -10,8 +10,9 @@ adguard_dns_port: 53
 adguard_ui_port: 3010
 uptime_kuma_port: 3001
 openspeedtest_port: 3003
-#wireguard_port: 51820
-wireguard_port: 45000
+# wireguard_port: 45000 # Old variable, replaced
+wireguard_int_port: 51820
+wireguard_ext_port: 45000
 wireguard_server_url: "vpn.vidafora.com"
 wireguard_peers: "phone,laptop" # Example: create configs for 'phone' and 'laptop'
 PUID: 1000

@@ -92,10 +92,10 @@
     - name: Allow WireGuard (UDP)
       community.general.ufw:
         rule: allow
-        port: "{{ wireguard_port }}"
+        port: "{{ wireguard_int_port }}" # UFW opens the internal host listening port
         proto: udp
-        comment: "Allow WireGuard VPN (UDP Port {{ wireguard_port }})"
-      when: wireguard_port is defined
+        comment: "Allow WireGuard VPN (UDP Port {{ wireguard_int_port }} - Host Listen Port)"
+      when: wireguard_int_port is defined
 
   become: yes
   when: ansible_connection != "local"

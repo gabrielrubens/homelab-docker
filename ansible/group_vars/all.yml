@@ -10,8 +10,12 @@ uptime_kuma_port: 3001
 openspeedtest_port: 3003
 
 # WireGuard configuration
+wireguard_server_url: "vpn.vidafora.com" # Default server URL
+wireguard_peers: "peer1" # Default peer list
+wireguard_int_port: 51820 # Internal port WireGuard container listens on, and host listens on with network_mode: host
+wireguard_ext_port: 45000 # External port clients connect to, and router forwards from
+
 # You might want to define PUID/PGID/TZ here too if they are consistent
-wireguard_port: 45000
 PUID: 1000
 PGID: 1000
 TZ: Europe/Lisbon
