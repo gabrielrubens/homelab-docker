@@ -54,12 +54,12 @@ services:
     environment:
       - PUID=${PUID:-1000}
       - PGID=${PGID:-1000}
-      - TZ=${TZ:-Europe/Lisbon} # Changed: Substituted from TZ in .env
-      - SERVERURL=${WIREGUARD_SERVERURL:-vpn.vidafora.com} # Changed: Substituted from WIREGUARD_SERVERURL in .env
-      - SERVERPORT=${wireguard_port:-45000}    # Uses wireguard_port from .env
-      - PEERS=2             # MODIFIED: Set to the number of peers in your wg0.conf
-      - PEERDNS=off # This was correctly set from previous steps
-      - INTERNAL_SUBNET=${WIREGUARD_INTERNAL_SUBNET:-10.13.13.0/24} # Changed: Substituted from WIREGUARD_INTERNAL_SUBNET in .env
+      - TZ=${TZ:-Europe/Lisbon}
+      - SERVERURL=${WIREGUARD_SERVERURL:-vpn.vidafora.com}
+      - SERVERPORT=${wireguard_port:-45000}
+      # - PEERS=2
+      - PEERDNS=off
+      - INTERNAL_SUBNET=${WIREGUARD_INTERNAL_SUBNET:-10.13.13.0/24}
       - ALLOWEDIPS=0.0.0.0/0, ::/0
       - WG_CONF_DIR=wg_confs # ADDED: To specify the config subdirectory
       # - LOG_CONFS=true
