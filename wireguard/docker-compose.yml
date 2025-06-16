@@ -2,6 +2,7 @@ services:
   wireguard:
     image: linuxserver/wireguard
     container_name: wireguard
+    network_mode: host
     cap_add:
       - NET_ADMIN
       # - SYS_MODULE # Required for kernel module operations
