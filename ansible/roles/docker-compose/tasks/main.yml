@@ -84,11 +84,22 @@
   become: yes
   when: ansible_connection != "local" # Skip in dev container
 
-- name: Ensure IP forwarding is enabled on server
+# Example for an Ansible role task file
+# - name: Ensure IP forwarding is enabled on server # You likely have this already
+#   ansible.posix.sysctl:
+#     name: net.ipv4.ip_forward
+#     value: '1'
+#     sysctl_file: /etc/sysctl.d/99-docker.conf # Or similar
+#     state: present
+#     reload: yes
+#   become: yes
+#   when: ansible_connection != "local" # Skip in dev container
+
+- name: Ensure net.ipv4.conf.all.src_valid_mark is enabled on server
   ansible.posix.sysctl:
-    name: net.ipv4.ip_forward
+    name: net.ipv4.conf.all.src_valid_mark
     value: '1'
-    sysctl_set: yes
+    sysctl_file: /etc/sysctl.d/99-wireguard.conf # Or another suitable file like 99-docker.conf
     state: present
     reload: yes
   become: yes
