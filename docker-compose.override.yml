@@ -46,6 +46,12 @@ services:
       - "${openspeedtest_port:-3003}:3000/tcp"
 
   wireguard:
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    security_opt:
+      - "apparmor:unconfined"
+    restart: unless-stopped
     ports:
       - "${wireguard_port:-45000}:51820/udp"
     volumes:
@@ -58,6 +64,7 @@ services:
       - SERVERURL=${WIREGUARD_SERVERURL:-vpn.vidafora.com}
       - SERVERPORT=${wireguard_port:-45000}
       # - PEERS=2
+      - PEERS="phone" # "phone,laptop"
       - PEERDNS=off
       - INTERNAL_SUBNET=${WIREGUARD_INTERNAL_SUBNET:-10.13.13.0/24}
       - ALLOWEDIPS=0.0.0.0/0, ::/0
