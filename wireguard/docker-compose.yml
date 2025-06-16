@@ -4,7 +4,7 @@ services:
     container_name: wireguard
     cap_add:
       - NET_ADMIN
-      - SYS_MODULE # Required for kernel module operations
+      # - SYS_MODULE # Required for kernel module operations
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
       # Add if you want IPv6 support in the tunnel
