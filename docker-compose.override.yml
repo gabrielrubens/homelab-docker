@@ -63,8 +63,8 @@ services:
       - TZ=${TZ:-Europe/Lisbon}
       - SERVERURL=${WIREGUARD_SERVERURL:-vpn.vidafora.com}
       - SERVERPORT=${wireguard_port:-45000}
-      # - PEERS=2
-      - PEERS=phone,laptop
+      - PEERS=2
+      # - PEERS=phone,laptop
       - PEERDNS=off
       - INTERNAL_SUBNET=${WIREGUARD_INTERNAL_SUBNET:-10.13.13.0/24}
       - ALLOWEDIPS=0.0.0.0/0, ::/0
