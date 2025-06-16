@@ -3,12 +3,6 @@ services:
   wireguard:
     image: linuxserver/wireguard
     container_name: wireguard
-    network_mode: host
-    cap_add:
-      - NET_ADMIN
-      - SYS_ADMIN # Added to allow setting sysctls like net.ipv4.conf.all.src_valid_mark in host network mode
-      # - SYS_MODULE # Required for kernel module operations if wireguard module is not pre-loaded on host
-    security_opt:
-      - "apparmor:unconfined"
+    network_mode: host  
     restart: unless-stopped
     # Ports, volumes, and environment variables will be defined in the override file

@@ -46,9 +46,9 @@ services:
       - "${openspeedtest_port:-3003}:3000/tcp"
 
   wireguard:
-    network_mode: host
     cap_add:
       - NET_ADMIN
+      - SYS_ADMIN 
     security_opt:
       - "apparmor:unconfined"
     restart: unless-stopped
