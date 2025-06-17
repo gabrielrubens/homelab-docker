@@ -46,6 +46,11 @@ services:
       file: ./wireguard/docker-compose.yml
       service: wireguard
 
+  homeassistant:
+    extends:
+      file: ./homeassistant/docker-compose.yml
+      service: homeassistant
+
   # dashy:
   #   extends:
   #     file: ./dashy/docker-compose.yml

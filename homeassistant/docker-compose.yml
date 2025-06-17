@@ -1,0 +1,20 @@
+# homeassistant/docker-compose.yml
+
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/homeassistant/config:/config"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/run/dbus:/run/dbus:ro" # Optional: For Bluetooth and other integrations
+    restart: unless-stopped
+    privileged: true # Optional: Often needed for Z-Wave/Zigbee sticks or other hardware access
+    network_mode: host # Home Assistant often requires host network for auto-discovery and integrations
+    # If not using network_mode: host, uncomment and adjust ports:
+    # ports:
+    #   - "${home_assistant_port:-8123}:8123/tcp"
+    environment:
+      - TZ=${TZ:-Europe/Lisbon}
+      # - PUID=${PUID:-1000} # Home Assistant runs as root internally by default, PUID/PGID usually not needed for its /config
+      # - PGID=${PGID:-1000}

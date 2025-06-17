@@ -97,5 +97,13 @@
         comment: "Allow WireGuard VPN (UDP Port {{ wireguard_int_port }} - Host Listen Port)"
       when: wireguard_int_port is defined
 
+    - name: Allow Home Assistant UI
+      community.general.ufw:
+        rule: allow
+        port: "{{ home_assistant_port | default('8123') }}"
+        proto: tcp
+        comment: "Allow Home Assistant UI (Port {{ home_assistant_port | default('8123') }})"
+      when: home_assistant_port is defined
+
   become: yes
   when: ansible_connection != "local"

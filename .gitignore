@@ -35,6 +35,9 @@ uptime-kuma/data/
 # WireGuard persistent data
 wireguard/config/
 
+#Home Assistant persistent data
+homeassistant/config/
+
 # -----------------------------
 # Ansible secrets / host_vars
 # -----------------------------

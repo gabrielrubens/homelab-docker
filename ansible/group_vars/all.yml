@@ -8,6 +8,7 @@ adguard_dns_port: 53
 adguard_ui_port: 3010
 uptime_kuma_port: 3001
 openspeedtest_port: 3003
+home_assistant_port: 8123 # Port for Home Assistant
 
 # WireGuard configuration
 wireguard_server_url: "vpn.vidafora.com" # Default server URL
