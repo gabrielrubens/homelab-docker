@@ -14,6 +14,13 @@
         # showTags: true               # If you want to display tags from Uptime Kuma
         # hideDownMonitors: false      # Set to true if you want to hide monitors that are down
 
+- Home Automation:
+    - Home Assistant:
+        icon: mdi-home-assistant # Material Design Icon for Home Assistant
+        href: http://192.168.1.92:8123 # Using the default Home Assistant port
+        description: Home automation platform
+        siteMonitor: http://192.168.1.92:8123
+
 - Homelab Tools:
     - Glances:
         href: http://192.168.1.92:61208
@@ -27,6 +34,6 @@
         siteMonitor: http://192.168.1.92:9000
         widget:
           type: portainer
-          url: http://192.168.1.92:9443
+          url: http://192.168.1.92:9000
           env: 1
           key: ptr_dLe4S8alpp8iEBLZ6oaUnf7P6kraPa0nHxu0fV2Pijw=
