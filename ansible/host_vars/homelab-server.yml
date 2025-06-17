@@ -15,6 +15,7 @@ wireguard_int_port: 51820
 wireguard_ext_port: 45000
 wireguard_server_url: "vpn.vidafora.com"
 wireguard_peers: "phone,laptop" # Example: create configs for 'phone' and 'laptop'
+wireguard_peerdns: 10.13.13.1
 PUID: 1000
 PGID: 1000
 TZ: "Europe/Lisbon" # Adjust to your timezone

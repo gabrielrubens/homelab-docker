@@ -66,7 +66,7 @@ services:
       - SERVERURL=${WIREGUARD_SERVERURL:-vpn.vidafora.com}
       - SERVERPORT=${wireguard_ext_port:-45000} # Clients connect to this external port
       - PEERS=${wireguard_peers:-1} # Using the variable from host_vars
-      - PEERDNS=off
+      - PEERDNS=${wireguard_peerdns:-10.13.13.1}
       - INTERNAL_SUBNET=${WIREGUARD_INTERNAL_SUBNET:-10.13.13.0/24}
       - ALLOWEDIPS=0.0.0.0/0, ::/0
       - WG_CONF_DIR=wg_confs # ADDED: To specify the config subdirectory
