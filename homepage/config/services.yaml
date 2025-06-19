@@ -65,6 +65,11 @@
         description: Subtitle management
         icon: bazarr.png
         siteMonitor: http://192.168.1.92:6767
+    - Prowlarr:
+        href: http://192.168.1.92:9696
+        description: Indexer management
+        icon: prowlarr.png
+        siteMonitor: http://192.168.1.92:9696
 
 - Downloads:
     - qBittorrent:

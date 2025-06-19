@@ -14,10 +14,11 @@ Example: `- /srv/homelab-docker/media/tv:/tv`
 ### **Configuration Order**
 
 1.  **qBittorrent** (The Downloader)
-2.  **Sonarr / Radarr / Lidarr** (The Media Managers)
-3.  **Bazarr** (The Subtitle Manager)
-4.  **Jellyfin** (The Media Server)
-5.  **Jellyseerr** (The Request Manager)
+2.  **Prowlarr** (The Indexer Manager)
+3.  **Sonarr / Radarr / Lidarr** (The Media Managers)
+4.  **Bazarr** (The Subtitle Manager)
+5.  **Jellyfin** (The Media Server)
+6.  **Jellyseerr** (The Request Manager)
 
 ---
 
@@ -47,10 +48,34 @@ Example: `- /srv/homelab-docker/media/tv:/tv`
 
 ---
 
-### **Step 2: Configure Sonarr (TV Shows)**
+### **Step 2: Configure Prowlarr (Indexer Manager)**
+
+Prowlarr manages your indexers and syncs them to your other *Arr apps.
+
+1.  **Open Prowlarr:** Navigate to `http://192.168.1.92:9696`.
+2.  **Add Your Indexers:**
+    *   Go to the **Indexers** tab.
+    *   Click the `+` button and add all of your preferred torrent and Usenet indexers.
+3.  **Connect *Arr Apps:**
+    *   Go to **Settings -> Apps**.
+    *   Click the `+` button to add an application.
+    *   Select **Sonarr**.
+    *   Fill in the details:
+        *   **Name:** Sonarr
+        *   **Sync Level:** `Add and Remove`
+        *   **Prowlarr Server:** `http://prowlarr:9696`
+        *   **Sonarr Server:** `http://sonarr:8989`
+        *   **API Key:** Find this in Sonarr's web UI under **Settings -> General**.
+    *   Click **Test**. It should succeed. Click **Save**.
+    *   Repeat this process for **Radarr** (`http://radarr:7878`) and **Lidarr** (`http://lidarr:8686`).
+
+---
+
+### **Step 3: Configure Sonarr (TV Shows)**
 
 1.  **Open Sonarr:** Navigate to `http://192.168.1.92:8989`.
-2.  **Add a Root Folder:**
+2.  **Verify Indexers:** Go to **Settings -> Indexers**. You should see the indexers you added in Prowlarr. They will be managed by Prowlarr, so you don't need to add them here manually.
+3.  **Add a Root Folder:**
     *   Go to **Settings -> Media Management**.
     *   Click the `+` icon to add a root folder.
     *   For the path, enter the **exact container path** for your TV shows:
@@ -58,7 +83,7 @@ Example: `- /srv/homelab-docker/media/tv:/tv`
         /tv
         ```
     *   Click **Ok**.
-3.  **Connect Download Client:**
+4.  **Connect Download Client:**
     *   Go to **Settings -> Download Clients**.
     *   Click `+`, find and select **qBittorrent**.
     *   Fill in the details:
@@ -67,13 +92,13 @@ Example: `- /srv/homelab-docker/media/tv:/tv`
         *   **Port:** `8080`
         *   **Username/Password:** The new permanent password you set in qBittorrent.
     *   Click **Test**. It should succeed. Click **Save**.
-4.  **Add Indexers & Shows:** Add your indexers and start adding TV shows.
+5.  You can now start adding TV shows.
 
 ---
 
-### **Step 3: Configure Radarr (Movies) & Lidarr (Music)**
+### **Step 4: Configure Radarr (Movies) & Lidarr (Music)**
 
-The process is identical to Sonarr, but use their specific container paths.
+The process is identical to Sonarr. Verify your Prowlarr indexers are present, set up the root folder, and connect the qBittorrent download client.
 
 *   **Radarr (`http://192.168.1.92:7878`):**
     *   **Root Folder Path:** `/movies`
@@ -85,7 +110,7 @@ The process is identical to Sonarr, but use their specific container paths.
 
 ---
 
-### **Step 4: Configure Bazarr (Subtitles)**
+### **Step 5: Configure Bazarr (Subtitles)**
 
 1.  **Open Bazarr:** `http://192.168.1.92:6767`.
 2.  **Connect Sonarr & Radarr:**
@@ -100,7 +125,7 @@ The process is identical to Sonarr, but use their specific container paths.
 
 ---
 
-### **Step 5: Configure Jellyfin (Media Server)**
+### **Step 6: Configure Jellyfin (Media Server)**
 
 1.  **Open Jellyfin:** `http://192.168.1.92:8096` and complete the setup wizard.
 2.  **Add Media Libraries:**
@@ -117,12 +142,10 @@ The process is identical to Sonarr, but use their specific container paths.
 
 ---
 
-### **Step 6: Configure Jellyseerr (Requests)**
+### **Step 7: Configure Jellyseerr (Requests)**
 
 1.  **Open Jellyseerr:** `http://192.168.1.92:5055` and log in with your Jellyfin account.
 2.  **Connect Services:**
     *   Go to **Settings -> Services**.
     *   Connect to Jellyfin, Sonarr, and Radarr using their service names (`jellyfin`, `sonarr`, `radarr`) and API keys.
     *   For Sonarr and Radarr, ensure the default paths are set correctly (e.g., `/tv` for Sonarr).
-
-This updated guide should be much clearer and lead to a successful setup. Thank you again for the valuable feedback.

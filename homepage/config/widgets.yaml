@@ -45,3 +45,7 @@
 - lidarr:
     url: http://192.168.1.92:8686
     apiKey: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
+
+- prowlarr:
+    url: http://192.168.1.92:9696
+    apiKey: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}

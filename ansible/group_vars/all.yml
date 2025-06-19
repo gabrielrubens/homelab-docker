@@ -25,6 +25,7 @@ TZ: "Europe/Lisbon"
 qbittorrent_port: 8080
 qbittorrent_tcp_port: 6881
 qbittorrent_udp_port: 6881
+prowlarr_port: 9696
 sonarr_port: 8989
 radarr_port: 7878
 lidarr_port: 8686

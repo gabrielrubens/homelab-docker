@@ -131,6 +131,7 @@
   become: true
   loop:
     - qbittorrent/config
+    - prowlarr/config
     - sonarr/config
     - radarr/config
     - lidarr/config
@@ -142,6 +143,8 @@
     - media/movies
     - media/music
     - media/tv
+    - media/audiobooks
+    - /opt/prowlarr/config
 
 - name: Tear down any existing homelab stack
   community.docker.docker_compose_v2:

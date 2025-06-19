@@ -46,6 +46,7 @@ lidarr/config/
 bazarr/config/
 jellyseerr/config/
 jellyfin/config/
+prowlarr/config/
 media/
 
 # -----------------------------
