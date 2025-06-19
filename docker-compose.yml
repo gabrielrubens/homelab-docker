@@ -51,6 +51,41 @@ services:
       file: ./homeassistant/docker-compose.yml
       service: homeassistant
 
+  qbittorrent:
+    extends:
+      file: ./qbittorrent/docker-compose.yml
+      service: qbittorrent
+
+  sonarr:
+    extends:
+      file: ./sonarr/docker-compose.yml
+      service: sonarr
+
+  radarr:
+    extends:
+      file: ./radarr/docker-compose.yml
+      service: radarr
+
+  lidarr:
+    extends:
+      file: ./lidarr/docker-compose.yml
+      service: lidarr
+
+  bazarr:
+    extends:
+      file: ./bazarr/docker-compose.yml
+      service: bazarr
+
+  jellyseerr:
+    extends:
+      file: ./jellyseerr/docker-compose.yml
+      service: jellyseerr
+
+  jellyfin:
+    extends:
+      file: ./jellyfin/docker-compose.yml
+      service: jellyfin
+
   # dashy:
   #   extends:
   #     file: ./dashy/docker-compose.yml

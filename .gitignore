@@ -38,6 +38,16 @@ wireguard/config/
 #Home Assistant persistent data
 homeassistant/config/
 
+#ARR Stack
+qbittorrent/config/
+sonarr/config/
+radarr/config/
+lidarr/config/
+bazarr/config/
+jellyseerr/config/
+jellyfin/config/
+media/
+
 # -----------------------------
 # Ansible secrets / host_vars
 # -----------------------------

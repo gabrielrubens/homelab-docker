@@ -16,6 +16,17 @@ wireguard_peers: "peer1" # Default peer list
 wireguard_int_port: 51820 # Internal port WireGuard container listens on, and host listens on with network_mode: host
 wireguard_ext_port: 45000 # External port clients connect to, and router forwards from
 
+# *arr stack
+qbittorrent_port: 8080
+qbittorrent_tcp_port: 6881
+qbittorrent_udp_port: 6881
+sonarr_port: 8989
+radarr_port: 7878
+lidarr_port: 8686
+bazarr_port: 6767
+jellyseerr_port: 5055
+jellyfin_port: 8096
+
 # You might want to define PUID/PGID/TZ here too if they are consistent
 PUID: 1000
 PGID: 1000

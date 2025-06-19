@@ -71,3 +71,98 @@ services:
       - ALLOWEDIPS=0.0.0.0/0, ::/0
       - WG_CONF_DIR=wg_confs # ADDED: To specify the config subdirectory
       # - LOG_CONFS=true
+
+  homeassistant:
+    ports:
+      - "${home_assistant_port:-8123}:8123/tcp"
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/homeassistant/config:/config:rw"
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Lisbon}
+
+  qbittorrent:
+    ports:
+      - "${qbittorrent_port:-8080}:8080"
+      - "${qbittorrent_tcp_port:-6881}:${qbittorrent_tcp_port:-6881}"
+      - "${qbittorrent_udp_port:-6881}:${qbittorrent_udp_port:-6881}/udp"
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/qbittorrent/config:/config"
+      - "${HOMELAB_DOCKER_PATH}/media/downloads:/downloads"
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Lisbon}
+      - WEBUI_PORT=${qbittorrent_port:-8080}
+
+  sonarr:
+    ports:
+      - "${sonarr_port:-8989}:8989"
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/sonarr/config:/config"
+      - "${HOMELAB_DOCKER_PATH}/media/tv:/tv"
+      - "${HOMELAB_DOCKER_PATH}/media/downloads:/downloads"
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Lisbon}
+
+  radarr:
+    ports:
+      - "${radarr_port:-7878}:7878"
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/radarr/config:/config"
+      - "${HOMELAB_DOCKER_PATH}/media/movies:/movies"
+      - "${HOMELAB_DOCKER_PATH}/media/downloads:/downloads"
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Lisbon}
+
+  lidarr:
+    ports:
+      - "${lidarr_port:-8686}:8686"
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/lidarr/config:/config"
+      - "${HOMELAB_DOCKER_PATH}/media/music:/music"
+      - "${HOMELAB_DOCKER_PATH}/media/downloads:/downloads"
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Lisbon}
+
+  bazarr:
+    ports:
+      - "${bazarr_port:-6767}:6767"
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/bazarr/config:/config"
+      - "${HOMELAB_DOCKER_PATH}/media/movies:/movies"
+      - "${HOMELAB_DOCKER_PATH}/media/tv:/tv"
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Lisbon}
+
+  jellyseerr:
+    ports:
+      - "${jellyseerr_port:-5055}:5055"
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/jellyseerr/config:/app/config"
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Lisbon}
+
+  jellyfin:
+    ports:
+      - "${jellyfin_port:-8096}:8096"
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/jellyfin/config:/config"
+      - "${HOMELAB_DOCKER_PATH}/media/tv:/data/tvshows"
+      - "${HOMELAB_DOCKER_PATH}/media/movies:/data/movies"
+      - "${HOMELAB_DOCKER_PATH}/media/music:/data/music"
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Lisbon}

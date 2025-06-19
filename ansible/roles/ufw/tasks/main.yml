@@ -100,10 +100,82 @@
     - name: Allow Home Assistant UI
       community.general.ufw:
         rule: allow
-        port: "{{ home_assistant_port | default('8123') }}"
+        port: "{{ home_assistant_port }}"
         proto: tcp
-        comment: "Allow Home Assistant UI (Port {{ home_assistant_port | default('8123') }})"
+        comment: "Allow Home Assistant UI (Port {{ home_assistant_port }})"
       when: home_assistant_port is defined
 
+    - name: Allow qBittorrent Web UI
+      community.general.ufw:
+        rule: allow
+        port: "{{ qbittorrent_port }}"
+        proto: tcp
+        comment: "Allow qBittorrent Web UI (Port {{ qbittorrent_port }})"
+      when: qbittorrent_port is defined
+
+    - name: Allow qBittorrent Torrenting (TCP)
+      community.general.ufw:
+        rule: allow
+        port: "{{ qbittorrent_tcp_port }}"
+        proto: tcp
+        comment: "Allow qBittorrent Torrenting (TCP Port {{ qbittorrent_tcp_port }})"
+
+    - name: Allow qBittorrent Torrenting (UDP)
+      community.general.ufw:
+        rule: allow
+        port: "{{ qbittorrent_udp_port }}"
+        proto: udp
+        comment: "Allow qBittorrent Torrenting (UDP Port {{ qbittorrent_udp_port }})"
+
+    - name: Allow Sonarr Web UI
+      community.general.ufw:
+        rule: allow
+        port: "{{ sonarr_port }}"
+        proto: tcp
+        comment: "Allow Sonarr Web UI (Port {{ sonarr_port }})"
+      when: sonarr_port is defined
+
+    - name: Allow Radarr Web UI
+      community.general.ufw:
+        rule: allow
+        port: "{{ radarr_port }}"
+        proto: tcp
+        comment: "Allow Radarr Web UI (Port {{ radarr_port }})"
+      when: radarr_port is defined
+
+    - name: Allow Lidarr Web UI
+      community.general.ufw:
+        rule: allow
+        port: "{{ lidarr_port }}"
+        proto: tcp
+        comment: "Allow Lidarr Web UI (Port {{ lidarr_port }})"
+      when: lidarr_port is defined
+
+    - name: Allow Bazarr Web UI
+      community.general.ufw:
+        rule: allow
+        port: "{{ bazarr_port }}"
+        proto: tcp
+        comment: "Allow Bazarr Web UI (Port {{ bazarr_port }})"
+      when: bazarr_port is defined
+
+    - name: Allow Jellyseerr Web UI
+      community.general.ufw:
+        rule: allow
+        port: "{{ jellyseerr_port }}"
+        proto: tcp
+        comment: "Allow Jellyseerr Web UI (Port {{ jellyseerr_port }})"
+      when: jellyseerr_port is defined
+
+    - name: Allow Jellyfin Web UI
+      community.general.ufw:
+        rule: allow
+        port: "{{ jellyfin_port }}"
+        proto: tcp
+        comment: "Allow Jellyfin Web UI (Port {{ jellyfin_port }})"
+      when: jellyfin_port is defined
+
+  #become: true
   become: yes
   when: ansible_connection != "local"
+  tags: ufw_config
