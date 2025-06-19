@@ -3,23 +3,28 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/latest/configs/settings
 
-# Base info
-startUrl: "/"
-title: "🏠 Homelab Homepage"
-description: "Links & live widgets for my Homelab"
+# Page meta
+title: Homelab
 
-# Visual theme
-theme: dark
-color: slate
+# Appearance
+layout:
+  "Homelab Management":
+    style: row
+  "Media":
+    style: row
+  "Media Management":
+    style: row
+  "Downloads":
+    style: row
+  "Network":
+    style: row
 
-
-# Background styling (using Tailwind CSS utilities)
 background:
-  image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=256
-  blur: sm
-  saturate: 50
-  brightness: 50
-  opacity: 50
+  image: "https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=256"
+  blur: sm # sm, md, lg
+  saturate: 50 # 0-200
+  brightness: 50 # 0-200
+  opacity: 30 # 0-100
 
 # External data providers (optional; remove if unused)
 providers:

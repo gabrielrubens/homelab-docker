@@ -3,34 +3,84 @@
 # https://gethomepage.dev/configs/services/
 
 
+- Homelab Management:
+    - Portainer:
+        href: http://192.168.1.92:9000
+        description: Docker management
+        icon: portainer.png
+        siteMonitor: http://192.168.1.92:9000
+    - Glances:
+        href: http://192.168.1.92:61208
+        description: System monitor
+        icon: glances.png
+        siteMonitor: http://192.168.1.92:61208
+    - Netdata:
+        href: http://192.168.1.92:19999
+        description: Real-time monitoring
+        icon: netdata.png
+        siteMonitor: http://192.168.1.92:19999
+    - Uptime Kuma:
+        description: Status page
+        href: http://192.168.1.92:3001
+        icon: uptime-kuma.png
+        siteMonitor: http://192.168.1.92:3001
+
 - Home Automation:
     - Home Assistant:
         description: Home automation platform
-        href: http://192.168.1.92:8123 # Using the default Home Assistant port
-        icon: mdi-home-assistant # Material Design Icon for Home Assistant
-        
+        href: http://192.168.1.92:8123
+        icon: mdi-home-assistant
         siteMonitor: http://192.168.1.92:8123
 
-- Homelab Status:
-    - Uptime Kuma:
-        description: Monitoring and status page for your homelab
-        href: http://192.168.1.92:3001
-        icon: uptime-kuma
-        siteMonitor: http://192.168.1.92:3001
+- Media:
+    - Jellyfin:
+        href: http://192.168.1.92:8096
+        description: Media server
+        icon: jellyfin.png
+        siteMonitor: http://192.168.1.92:8096
+    - Jellyseerr:
+        href: http://192.168.1.92:5055
+        description: Media requests
+        icon: jellyseerr.png
+        siteMonitor: http://192.168.1.92:5055
 
-- Homelab Tools:
-    - Glances:
-        href: http://192.168.1.92:61208
-        description: Simple resource usage via Glances
-        icon: glances.png
-        siteMonitor: http://192.168.1.92:61208
-    - Portainer:
-        href: http://192.168.1.92:9000
-        description: Docker management via Portainer
-        icon: portainer.png
-        siteMonitor: http://192.168.1.92:9000
-        widget:
-          type: portainer
-          url: http://192.168.1.92:9000
-          env: 1
-          key: ptr_dLe4S8alpp8iEBLZ6oaUnf7P6kraPa0nHxu0fV2Pijw=
+- Media Management:
+    - Sonarr:
+        href: http://192.168.1.92:8989
+        description: TV show management
+        icon: sonarr.png
+        siteMonitor: http://192.168.1.92:8989
+    - Radarr:
+        href: http://192.168.1.92:7878
+        description: Movie management
+        icon: radarr.png
+        siteMonitor: http://192.168.1.92:7878
+    - Lidarr:
+        href: http://192.168.1.92:8686
+        description: Music management
+        icon: lidarr.png
+        siteMonitor: http://192.168.1.92:8686
+    - Bazarr:
+        href: http://192.168.1.92:6767
+        description: Subtitle management
+        icon: bazarr.png
+        siteMonitor: http://192.168.1.92:6767
+
+- Downloads:
+    - qBittorrent:
+        href: http://192.168.1.92:8080
+        description: Torrent client
+        icon: qbittorrent.png
+        siteMonitor: http://192.168.1.92:8080
+
+- Network:
+    - AdGuard Home:
+        href: http://192.168.1.92:3010
+        description: DNS ad-blocker
+        icon: adguard-home.png
+        siteMonitor: http://192.168.1.92:3010
+    - OpenSpeedTest:
+        href: http://192.168.1.92:3003
+        description: Speed test
+        icon: openspeedtest.png
+        siteMonitor: http://192.168.1.92:3003

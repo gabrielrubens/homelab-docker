@@ -39,3 +39,23 @@
         - abbr: HP
           href: http://192.168.1.92:3010
           icon: homepage.png
+
+- Documentation:
+    - Homepage:
+        - abbr: HP
+          href: https://gethomepage.dev/
+          icon: homepage.png
+    - Ansible:
+        - abbr: AN
+          href: https://docs.ansible.com/
+          icon: ansible.png
+    - Docker:
+        - abbr: DC
+          href: https://docs.docker.com/
+          icon: docker.png
+
+- Media:
+    - TRaSH Guides:
+        - abbr: TG
+          href: https://trash-guides.info/
+          icon: trash-guides.png
