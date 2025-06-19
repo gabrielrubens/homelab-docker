@@ -121,6 +121,28 @@
     mode: '0750' # Restrictive permissions
   when: ansible_connection != "local" # Only for server deployment
 
+- name: Ensure Media Suite directories exist and have correct permissions
+  ansible.builtin.file:
+    path: "{{ homelab_dest }}/{{ item }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ puid }}"
+    group: "{{ pgid }}"
+  become: true
+  loop:
+    - qbittorrent/config
+    - sonarr/config
+    - radarr/config
+    - lidarr/config
+    - bazarr/config
+    - jellyseerr/config
+    - jellyfin/config
+    - media
+    - media/downloads
+    - media/movies
+    - media/music
+    - media/tv
+
 - name: Tear down any existing homelab stack
   community.docker.docker_compose_v2:
     project_src: "{{ homelab_dest }}"
