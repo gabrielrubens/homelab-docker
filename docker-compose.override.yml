@@ -82,11 +82,25 @@ services:
       - PGID=${PGID:-1000}
       - TZ=${TZ:-Europe/Lisbon}
 
-  qbittorrent:
+  gluetun:
     ports:
-      - "${qbittorrent_port:-8080}:8080"
-      - "${qbittorrent_tcp_port:-6881}:${qbittorrent_tcp_port:-6881}"
+      # Port for qBittorrent WebUI (forwarded through the VPN)
+      - "${qbittorrent_port:-8080}:8080/tcp"
+      # Ports for qBittorrent P2P connections (forwarded through the VPN)
+      - "${qbittorrent_tcp_port:-6881}:${qbittorrent_tcp_port:-6881}/tcp"
       - "${qbittorrent_udp_port:-6881}:${qbittorrent_udp_port:-6881}/udp"
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/gluetun:/gluetun"
+    environment:
+      - VPN_SERVICE_PROVIDER=nordvpn
+      - VPN_TYPE=openvpn
+      - OPENVPN_USER=${NORDVPN_USER}
+      - OPENVPN_PASSWORD=${NORDVPN_PASSWORD}
+      - SERVER_COUNTRIES=${NORDVPN_SERVER_COUNTRIES}
+      - TZ=${TZ}
+
+  qbittorrent:
+    network_mode: "service:gluetun"
     volumes:
       - "${HOMELAB_DOCKER_PATH}/qbittorrent/config:/config"
       - "${HOMELAB_DOCKER_PATH}/media/downloads:/downloads"
@@ -95,6 +109,9 @@ services:
       - PGID=${PGID:-1000}
       - TZ=${TZ:-Europe/Lisbon}
       - WEBUI_PORT=${qbittorrent_port:-8080}
+      #- WEBUI_PORT=8080
+    depends_on:
+      - gluetun
 
   sonarr:
     ports:

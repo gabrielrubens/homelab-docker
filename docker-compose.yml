@@ -86,6 +86,11 @@ services:
       file: ./jellyfin/docker-compose.yml
       service: jellyfin
 
+  gluetun:
+    extends:
+      file: ./gluetun/docker-compose.yml
+      service: gluetun
+
   prowlarr:
     extends:
       file: ./prowlarr/docker-compose.yml

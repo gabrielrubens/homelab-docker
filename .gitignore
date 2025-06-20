@@ -47,6 +47,7 @@ bazarr/config/
 jellyseerr/config/
 jellyfin/config/
 prowlarr/config/
+gluetun/config/
 media/
 
 # -----------------------------
