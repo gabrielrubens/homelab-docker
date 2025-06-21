@@ -180,3 +180,11 @@
     docker exec adguardhome chmod 0700 /opt/adguardhome/conf
   become: true
   when: inventory_hostname == 'homelab-server' # Or ansible_connection != "local" if 'homelab-server' isn't always the target
+
+- name: Create Apprise config file from template
+  ansible.builtin.template:
+    src: apprise.yml.j2
+    dest: "{{ homelab_dest }}/apprise/config/apprise.yml"
+    owner: "{{ puid }}"
+    group: "{{ pgid }}"
+    mode: '0644'
