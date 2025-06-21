@@ -45,7 +45,7 @@ The following containerized services are included in this stack. They are define
 | **Home Assistant**| [Home Assistant](http://{{ ansible_host }}:{{ home_assistant_port }}) | Home automation platform |
 | **Homepage** | [Homepage](http://{{ ansible_host }}:{{ homepage_port }}) | Primary, config-driven dashboard |
 | **Jellyfin** | [Jellyfin](http://{{ ansible_host }}:{{ jellyfin_port }}) | Media server & streaming |
-| **Jellyseerr** | [Jellyseerr](http://192.168.1.92:5055/) | Media request management |
+| **Jellyseerr** | [Jellyseerr](http://{{ ansible_host }}:{{ jellyseerr_port }}) | Media request management |
 | **Lidarr** | [Lidarr](http://{{ ansible_host }}:{{ lidarr_port }}) | Music collection manager |
 | **Netdata** | [Netdata](http://{{ ansible_host }}:19999) | Real-time system metrics |
 | **OpenSpeedTest**| [OpenSpeedTest](http://{{ ansible_host }}:{{ openspeedtest_port }}) | Self-hosted speed test |
