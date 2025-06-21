@@ -1,5 +1,5 @@
 services:
   apprise:
-    image: linuxserver/apprise:latest
+    image: linuxserver/apprise-api:latest
     container_name: apprise
     restart: unless-stopped
