@@ -1,10 +1,11 @@
 # This file is managed by Ansible
 # /workspace/ansible/roles/docker-compose/templates/apprise.yml.j2
 
+version: 1
 urls:
   # Add your notification services here.
   # The variables are pulled from your credentials.yml file.
-  - tgram://{{ telegram_bot_token }}/{{ telegram_chat_id }}/?image=yes
+  - tgram://{{ telegram_bot_token }}/{{ telegram_chat_id }}
 
   # Example of adding more later:
   # - discord://YourWebhookID/YourWebhookToken
