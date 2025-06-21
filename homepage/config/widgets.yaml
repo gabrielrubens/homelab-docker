@@ -1,14 +1,7 @@
 ---
 # config/widgets.yaml
 # For configuration options and examples, please see:
-# https://gethomepage.dev/configs/info-widgets/
-
-- resources:
-    cpu: true
-    memory: true
-    disk: /
-    alerts: true
-
+# https://gethomepage.dev/en/configs/widgets/
 
 # - My Homelab Status: # This is the group title that will appear on Homepage
 #     - Uptime Kuma:
@@ -27,25 +20,57 @@
 #     username: "{{HOMEPAGE_VAR_ADGUARD_USERNAME}}"
 #     password: "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}"
 
+- resources:
+    label: System
+    cpu: true
+    memory: true
+    disk: /
+    
+- datetime:
+    text_size: xl
+    format:
+      timeStyle: long
+      dateStyle: full
+
 - search:
     provider: duckduckgo
     target: _blank
 
-- qbittorrent:
-    url: http://192.168.1.92:8080
+- group:
+    - name: "*Arr Stack"
+      columns: 2
+      widgets:
+        - sonarr:
+            url: http://192.168.1.92:8989
+            apiKey: {{HOMEPAGE_VAR_SONARR_API_KEY}}
+        - radarr:
+            url: http://192.168.1.92:7878
+            apiKey: {{HOMEPAGE_VAR_RADARR_API_KEY}}
+        - lidarr:
+            url: http://192.168.1.92:8686
+            apiKey: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
+        - prowlarr:
+            url: http://192.168.1.92:9696
+            apiKey: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
 
-- sonarr:
-    url: http://192.168.1.92:8989
-    apiKey: {{HOMEPAGE_VAR_SONARR_API_KEY}}
+- group:
+    - name: Downloads
+      columns: 1
+      widgets:
+        - qbittorrent:
+            url: http://192.168.1.92:8080
 
-- radarr:
-    url: http://192.168.1.92:7878
-    apiKey: {{HOMEPAGE_VAR_RADARR_API_KEY}}
-
-- lidarr:
-    url: http://192.168.1.92:8686
-    apiKey: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
-
-- prowlarr:
-    url: http://192.168.1.92:9696
-    apiKey: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
+- group:
+    - name: Monitoring
+      columns: 2
+      widgets:
+        - glances:
+            url: http://192.168.1.92:61208
+            expanded: true
+        - netdata:
+            url: http://192.168.1.92:19999
+            
+- adguard:
+    url: http://192.168.1.92:3010
+    username: {{HOMEPAGE_VAR_ADGUARD_USERNAME}}
+    password: {{HOMEPAGE_VAR_ADGUARD_PASSWORD}}
