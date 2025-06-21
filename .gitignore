@@ -69,3 +69,6 @@ media/
 
 # Ignore other unwanted local state
 */.env
+
+# Local secrets
+ansible/vars/credentials.yml
