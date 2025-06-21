@@ -8,13 +8,60 @@ A reference for setting up and maintaining my personal Homelab environment, focu
 
 | Service   | Image                             | Ports                          | Notes                                 |
 | --------- | --------------------------------- | ------------------------------ | ------------------------------------- |
-| Dashy     | ghcr.io/lissy93/dashy:latest      | `0.0.0.0:4000→8080`            | Dashboard UI                          |
-| Homepage  | ghcr.io/gethomepage/homepage:latest | `0.0.0.0:{{ homepage_port }}→3001` | Config-driven startpage              |
-| Glances   | nicolargo/glances:latest          | `0.0.0.0:{{ glances_port }}→61208` | System monitor (`glances -w`)       |
-| Netdata   | netdata/netdata:latest            | `0.0.0.0:19999`                | Real-time metrics                     |
-| Pi-hole   | pihole/pihole:latest              | DNS TCP/UDP 53, HTTP 80        | DNS-level ad blocker                  |
-| Portainer | portainer/portainer-ce:latest      | HTTP `9000`                    | (Optional) container GUI              |
+| AdGuard Home| `adguard/adguardhome`             | `{{ adguard_ui_port }}`, `53` (DNS) | Network-wide ad & tracker blocking    |
+| Apprise   | `linuxserver/apprise-api`         | `{{ apprise_port }}`           | Centralized notification gateway      |
+| Bazarr    | `linuxserver/bazarr`              | `{{ bazarr_port }}`            | Subtitle manager for Sonarr/Radarr    |
+| Glances   | `nicolargo/glances`               | `{{ glances_port }}`           | System monitoring dashboard           |
+| Gluetun   | `qmcgaw/gluetun`                  | -                              | VPN client for other containers       |
+| Home Assistant| `linuxserver/home-assistant`    | `{{ home_assistant_port }}`    | Home automation platform              |
+| Homepage  | `ghcr.io/gethomepage/homepage:latest` | `{{ homepage_port }}`          | Config-driven startpage               |
+| Jellyfin  | `linuxserver/jellyfin`            | `{{ jellyfin_port }}`          | Media server & streaming              |
+| Jellyseerr| `fallenbagel/jellyseerr`          | `{{ jellyseerr_port }}`        | Media request management              |
+| Lidarr    | `linuxserver/lidarr`              | `{{ lidarr_port }}`            | Music collection manager              |
+| Netdata   | `netdata/netdata`                 | `19999`                        | Real-time metrics                     |
+| OpenSpeedTest| `openspeedtest/latest`         | `{{ openspeedtest_port }}`     | Self-hosted speed test                |
+| Prowlarr  | `linuxserver/prowlarr`            | `{{ prowlarr_port }}`          | Indexer manager for *Arr stack        |
+| qBittorrent| `linuxserver/qbittorrent`       | `{{ qbittorrent_port }}`       | Torrent download client               |
+| Radarr    | `linuxserver/radarr`              | `{{ radarr_port }}`            | Movie collection manager              |
+| Sonarr    | `linuxserver/sonarr`              | `{{ sonarr_port }}`            | TV show collection manager            |
+| Uptime Kuma| `louislam/uptime-kuma`           | `{{ uptime_kuma_port }}`       | Service monitoring and status page    |
+| WireGuard | `linuxserver/wireguard`           | `{{ wireguard_ext_port }}` (UDP)| VPN server                            |
+| Portainer | `portainer/portainer-ce:latest`   | `9000`                         | (Optional) container GUI              |
 
+
+---
+
+## ✅ Services Overview
+
+The following containerized services are included in this stack. They are defined across the root `docker-compose.yml` and service-specific compose files (e.g., `sonarr/docker-compose.yml`).
+
+| Service | URL | Purpose |
+| :--- | :--- | :--- |
+| **AdGuard Home** | [AdGuard Home](http://{{ ansible_host }}:{{ adguard_ui_port }}) | Network-wide ad & tracker blocking |
+| **Apprise** | [Apprise](http://{{ ansible_host }}:{{ apprise_port }}) | Centralized notification gateway |
+| **Bazarr** | [Bazarr](http://{{ ansible_host }}:{{ bazarr_port }}) | Subtitle manager for Sonarr/Radarr |
+| **Glances** | [Glances](http://{{ ansible_host }}:{{ glances_port }}) | System monitoring dashboard |
+| **Gluetun** | - | VPN client for other containers |
+| **Home Assistant**| [Home Assistant](http://{{ ansible_host }}:{{ home_assistant_port }}) | Home automation platform |
+| **Homepage** | [Homepage](http://{{ ansible_host }}:{{ homepage_port }}) | Primary, config-driven dashboard |
+| **Jellyfin** | [Jellyfin](http://{{ ansible_host }}:{{ jellyfin_port }}) | Media server & streaming |
+| **Jellyseerr** | [Jellyseerr](http://192.168.1.92:5055/) | Media request management |
+| **Lidarr** | [Lidarr](http://{{ ansible_host }}:{{ lidarr_port }}) | Music collection manager |
+| **Netdata** | [Netdata](http://{{ ansible_host }}:19999) | Real-time system metrics |
+| **OpenSpeedTest**| [OpenSpeedTest](http://{{ ansible_host }}:{{ openspeedtest_port }}) | Self-hosted speed test |
+| **Prowlarr** | [Prowlarr](http://{{ ansible_host }}:{{ prowlarr_port }}) | Indexer manager for *Arr stack |
+| **qBittorrent**| [qBittorrent](http://{{ ansible_host }}:{{ qbittorrent_port }}) | Torrent download client |
+| **Radarr** | [Radarr](http://{{ ansible_host }}:{{ radarr_port }}) | Movie collection manager |
+| **Sonarr** | [Sonarr](http://{{ ansible_host }}:{{ sonarr_port }}) | TV show collection manager |
+| **Uptime Kuma**| [Uptime Kuma](http://{{ ansible_host }}:{{ uptime_kuma_port }}) | Service monitoring and status page |
+| **WireGuard** | - | VPN server |
+| **Portainer** | [Portainer](http://{{ ansible_host }}:9000) | (Optional) container GUI |
+
+---
+
+## 💻 Hardware
+
+This homelab runs on a low-power, small form-factor PC. For detailed specifications, see the [Hardware Specs](./docs/beelink_mini_s13_specs.md) document.
 
 ---
 
@@ -36,9 +83,6 @@ homelab-docker/
 │       ├── git-clone/
 │       ├── docker-compose/
 │       └── ufw/
-├── dashy/
-│   ├── docker-compose.yml
-│   └── conf.yml
 ├── glances/
 │   └── docker-compose.yml
 ├── homepage/
@@ -46,9 +90,47 @@ homelab-docker/
 │   └── config/                   # homepage configs (bookmarks, widgets, etc.)
 ├── netdata/
 │   └── docker-compose.yml
-└── pihole/
+└── wireguard/
     └── docker-compose.yml
 ```
+
+---
+
+## ⚙️ Configuration
+
+Configuration is managed primarily through Ansible variables and an environment file.
+
+### Core Variables
+
+- **`ansible/group_vars/all.yml`**: Contains default settings for the entire stack, such as service ports, PUID/PGID, and timezone. **Review this file first and adjust as needed.**
+- **`ansible/host_vars/`**: Contains overrides for specific hosts. For example, `homelab-server.yml` might contain the server's static IP address.
+- **`.env` file**: This file is generated by Ansible from the `.env.j2` template and `all.yml` variables. It is used by Docker Compose to inject environment variables into the containers at runtime.
+
+### Secret Management (Ansible Vault)
+
+All sensitive data (API keys, passwords, tokens) is stored in `ansible/vars/credentials.yml`. This file is encrypted using **Ansible Vault**.
+
+- **To Edit Secrets**: Run the following command and enter the vault password when prompted:
+  ```bash
+  ansible-vault edit ansible/vars/credentials.yml
+  ```
+- **To Create a Vault Password**: If you are setting this up for the first time, create a file (e.g., `.vault_pass`) containing your desired password. Then you can run playbooks with `--vault-password-file ./.vault_pass`.
+
+---
+
+## 👨🏽‍💻 Adding or Removing a Service
+   - Create a new subfolder (e.g. `myservice/`) with its own `docker-compose.yml`.
+   - In the root `docker-compose.yml`, add an `extends:` entry under `services:`.
+   - Optionally, add dev-bind overrides in `docker-compose.override.yml` under your `dev` profile.
+   - Update UFW role (`ansible/roles/ufw/tasks/main.yml`) to allow the new service’s port, using the pattern:
+     ```yaml
+     - name: Allow MyService (HTTP)
+       ufw:
+         rule: allow
+         port: "{{ myservice_port }}"
+         proto: tcp
+         comment: "Allow MyService HTTP"
+     ```
 
 ---
 
@@ -81,21 +163,36 @@ Everything—cloning the repo, updating code, tearing down and re-creating conta
    - Bring up the full umbrella compose (with `docker-compose.yml` and `docker-compose.override.yml` if present)
    - Install & enable UFW, then add/remove rules for each service port
 
-3. **Adding or Removing a Service**:
-   - Create a new subfolder (e.g. `myservice/`) with its own `docker-compose.yml`.
-   - In the root `docker-compose.yml`, add an `extends:` entry under `services:`.
-   - Optionally, add dev-bind overrides in `docker-compose.override.yml` under your `dev` profile.
-   - Update UFW role (`ansible/roles/ufw/tasks/main.yml`) to allow the new service’s port, using the pattern:
-     ```yaml
-     - name: Allow MyService (HTTP)
-       ufw:
-         rule: allow
-         port: "{{ myservice_port }}"
-         proto: tcp
-         comment: "Allow MyService HTTP"
-     ```
+---
 
-4. **Firewall Rules (UFW)**  
+## 📣 Apprise Notifications
+
+Apprise is configured as a centralized notification gateway. Instead of configuring each application to talk to Telegram, Discord, etc., you configure them to talk to Apprise, and Apprise handles the rest.
+
+The Apprise service is available to other Docker containers at `http://apprise:8000`. The configuration is file-based, using the key `apprise`.
+
+The full notification URL for other services to use is:
+**`http://apprise:8000/notify/apprise`**
+
+### Testing Apprise
+
+You can send a test notification from your server's command line using `curl`:
+```bash
+curl -X POST -d "body=This is a test notification from curl" http://localhost:{{ apprise_port }}/notify/apprise
+```
+If configured correctly, this will send a message to the Telegram chat defined in your `credentials.yml`.
+
+---
+
+## 📚 Project Documentation
+
+For detailed setup and configuration guides, please see the documents below:
+
+- **[Arr Stack & Jellyfin Setup Guide](./docs/arr-stack-and-jellyfin-setup-guide.md)**: Step-by-step guide for configuring the entire media stack after deployment.
+
+---
+
+## 🔥 Firewall Rules (UFW)  
    The Ansible role will ensure UFW is installed, enabled, and has rules for:
    - SSH
    - Dashy (port `{{ dashy_port }}`)
@@ -184,21 +281,7 @@ cd homelab-docker
 
 ## 💻 Hardware
 
-### Mini PC – Beelink Mini S13
-
-| Component        | Details                                                |
-|------------------|--------------------------------------------------------|
-| **Model**        | Beelink Mini S13                                       |
-| **CPU**          | Intel Twin Lake-N150 (4C/4T, up to 3.6 GHz)            |
-| **RAM**          | 16 GB DDR4 @ 3200 MHz                                  |
-| **Storage**      | 500 GB M.2 SATA3 SSD                                   |
-| **Expansion**    | 2 × M.2 slots (PCIe 3.0 x4/SATA3 & PCIe 3.0 x1)        |
-| **GPU**          | Intel UHD Graphics                                     |
-| **Networking**   | Gigabit Ethernet, Wi-Fi 6, Bluetooth 5.2               |
-| **Video Output** | Dual HDMI (4K @ 60 Hz)                                 |
-| **USB**          | 4 × USB 3.0                                            |
-| **Power**        | 12 V DC / 3 A                                          |
-| **OS**           | Ubuntu Server                                          |
+This homelab runs on a low-power, small form-factor PC. For detailed specifications, see the [Hardware Specs](./docs/beelink_mini_s13_specs.md) document.
 
 ---
 

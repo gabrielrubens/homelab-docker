@@ -110,18 +110,27 @@ The process is identical to Sonarr. Verify your Prowlarr indexers are present, s
 
 ---
 
-### **Step 5: Configure Bazarr (Subtitles)**
+### **Step 5: Configure Apprise Notifications**
 
-1.  **Open Bazarr:** `http://192.168.1.92:6767`.
-2.  **Connect Sonarr & Radarr:**
-    *   Go to **Settings -> Sonarr** and **Settings -> Radarr**.
-    *   Use the service names (`sonarr`, `radarr`) as the host and their respective API keys (found in their Settings -> General tabs).
-3.  **Configure Path Mappings (Important!):**
-    *   Go to **Settings -> Sonarr/Radarr**.
-    *   You may need to define path mappings if Bazarr can't find your files.
-    *   Add a mapping:
-        *   **Sonarr/Radarr Path:** `/tv` (or `/movies`)
-        *   **Bazarr Path:** `/tv` (or `/movies`)
+Apprise is used to handle all notifications from the *Arr stack to services like Telegram, Discord, etc. You will add Apprise as a connection in each app.
+
+1.  **In Sonarr/Radarr/Lidarr/Bazarr:**
+    *   Navigate to **Settings -> Connect**.
+    *   Click the `+` button to add a new connection.
+    *   Find and select **Apprise** from the list.
+2.  **Configure the Apprise Connection:**
+    *   **Name:** `Apprise` (or any name you prefer).
+    *   **Hostname:** `apprise` (this is the Docker service name).
+    *   **Port:** `8000`
+    *   **URL(s) / Key**: In this field, you only need to provide the configuration key. Enter:
+        ```
+        apprise
+        ```
+3.  **Test and Save:**
+    *   Click the **Test** button. You should see a "Test successful" message.
+    *   Click **Save**.
+
+Repeat these steps for each *Arr application to centralize your notifications.
 
 ---
 
