@@ -91,6 +91,11 @@ services:
       file: ./gluetun/docker-compose.yml
       service: gluetun
 
+  apprise:
+    extends:
+      file: ./apprise/docker-compose.yml
+      service: apprise
+
   prowlarr:
     extends:
       file: ./prowlarr/docker-compose.yml

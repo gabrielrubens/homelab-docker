@@ -146,6 +146,7 @@
     - media/audiobooks
     - /opt/prowlarr/config
     - /opt/gluetun
+    - /opt/apprise/config
 
 - name: Tear down any existing homelab stack
   community.docker.docker_compose_v2:

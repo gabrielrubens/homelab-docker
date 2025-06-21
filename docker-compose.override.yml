@@ -82,6 +82,16 @@ services:
       - PGID=${PGID:-1000}
       - TZ=${TZ:-Europe/Lisbon}
 
+  apprise:
+    ports:
+      - "${apprise_port:-8000}:8000"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - "${HOMELAB_DOCKER_PATH}/apprise/config:/config"
+
   gluetun:
     ports:
       # Port for qBittorrent WebUI (forwarded through the VPN)

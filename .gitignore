@@ -38,6 +38,9 @@ wireguard/config/
 #Home Assistant persistent data
 homeassistant/config/
 
+# Apprise persistent data
+apprise/config/
+
 #ARR Stack
 qbittorrent/config/
 sonarr/config/

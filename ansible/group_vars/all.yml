@@ -36,3 +36,6 @@ jellyfin_port: 8096
 # --- GlueTUN / NordVPN Settings ---
 # Example: "United States", "Germany", "se" (for Sweden)
 nordvpn_server_countries: "United States"
+
+# --- Notification Settings ---
+apprise_port: 8000

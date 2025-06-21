@@ -24,6 +24,11 @@
         href: http://192.168.1.92:3001
         icon: uptime-kuma.png
         siteMonitor: http://192.168.1.92:3001
+    - Apprise:
+        description: Notification manager
+        href: http://192.168.1.92:8000
+        icon: apprise.png
+        siteMonitor: http://192.168.1.92:8000
 
 - Home Automation:
     - Home Assistant:

@@ -183,6 +183,14 @@
         comment: "Allow Prowlarr Web UI (Port {{ prowlarr_port }})"
       when: prowlarr_port is defined
 
+    - name: Allow Apprise
+      community.general.ufw:
+        rule: allow
+        port: "{{ apprise_port }}"
+        proto: tcp
+        comment: "Allow Apprise service (Port {{ apprise_port }})"
+      when: apprise_port is defined
+
   #become: true
   become: yes
   when: ansible_connection != "local"
