@@ -1,6 +1,5 @@
-version: "3.8"
 services:
   apprise:
-    image: lscr.io/linuxserver/apprise:latest
+    image: linuxserver/apprise:latest
     container_name: apprise
     restart: unless-stopped
