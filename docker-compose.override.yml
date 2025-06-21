@@ -89,7 +89,7 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
-      - APPRISE_CONFIG=/config/apprise.yml
+      - APPRISE_CONFIG=yaml:///config/apprise.yml
     volumes:
       - "${HOMELAB_DOCKER_PATH}/apprise/config:/config"
 
